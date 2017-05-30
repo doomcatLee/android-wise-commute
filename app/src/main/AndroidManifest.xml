@@ -20,7 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TrainColorActivity"></activity>
+        <activity android:name=".TrainColorActivity" />
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".CardFlipActivity"></activity>
     </application>
 
 </manifest>

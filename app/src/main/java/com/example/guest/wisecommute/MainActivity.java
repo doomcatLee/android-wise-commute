@@ -8,16 +8,24 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.btnLogIn) Button btnLogIn;
+    @Bind(R.id.btnRegister) Button btnRegister;
     @Bind(R.id.etUsername) EditText etUsername;
     @Bind(R.id.etPassword) EditText etPassword;
+    @Bind(R.id.btnChange) Button btnChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        btnLogIn.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
+        btnChange.setOnClickListener(this);
     }
 
     @Override
@@ -28,6 +36,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("username", etUsername.getText().toString());
             intent.putExtra("password", etPassword.getText().toString());
 
+            startActivity(intent);
+        } else if (v == btnRegister) {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        } else if (v == btnChange) {
+            Intent intent = new Intent(MainActivity.this, CardFlipActivity.class);
             startActivity(intent);
         }
     }

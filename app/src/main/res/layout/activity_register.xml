@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.guest.wisecommute.MainActivity"
+    tools:context="com.example.guest.wisecommute.RegisterActivity"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="25dp"
         android:text="Wise Commute"
         android:textColor="@color/colorDarkTitle"
         android:textSize="50sp"
@@ -53,31 +53,30 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        app:layout_constraintVertical_bias="0.187">
+        app:layout_constraintVertical_bias="0.184">
 
         <Button
             android:id="@+id/btnLogIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:layout_alignBottom="@+id/btnRegister"
+            android:layout_alignLeft="@+id/etPasswordConfirm"
+            android:layout_alignStart="@+id/etPasswordConfirm"
+            android:background="@color/colorPrimaryDark"
             android:text="Log In"
             android:textColor="@color/colorTextPrimary"
             tools:layout_editor_absoluteX="151dp"
-            tools:layout_editor_absoluteY="385dp"
-            android:layout_alignBaseline="@+id/btnRegister"
-            android:layout_alignBottom="@+id/btnRegister"
-            android:layout_alignRight="@+id/etPassword"
-            android:layout_alignEnd="@+id/etPassword" />
+            tools:layout_editor_absoluteY="385dp" />
 
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/etPassword"
-            android:layout_alignStart="@+id/etPassword"
-            android:layout_below="@+id/etPassword"
-            android:layout_marginTop="60dp"
-            android:background="@color/colorPrimaryDark"
+            android:layout_alignEnd="@+id/etPasswordConfirm"
+            android:layout_alignRight="@+id/etPasswordConfirm"
+            android:layout_below="@+id/etPasswordConfirm"
+            android:layout_marginTop="43dp"
+            android:background="@color/colorAccent"
             android:text="Register"
             android:textColor="@color/colorTextPrimary"
             tools:layout_editor_absoluteX="151dp"
@@ -87,7 +86,6 @@
             android:id="@+id/etUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
             android:backgroundTint="@color/colorAccent"
             android:ems="10"
             android:hint="Username"
@@ -97,6 +95,7 @@
             android:textColorHint="@color/colorTextPrimary"
             tools:layout_editor_absoluteX="85dp"
             tools:layout_editor_absoluteY="270dp"
+            android:layout_marginTop="31dp"
             android:layout_alignParentTop="true"
             android:layout_alignLeft="@+id/etPassword"
             android:layout_alignStart="@+id/etPassword" />
@@ -105,9 +104,6 @@
             android:id="@+id/etPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etUsername"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
             android:backgroundTint="@color/colorAccent"
             android:ems="10"
             android:hint="Password"
@@ -116,18 +112,27 @@
             android:textColorHighlight="@color/colorTextPrimary"
             android:textColorHint="@color/colorTextPrimary"
             tools:layout_editor_absoluteX="85dp"
-            tools:layout_editor_absoluteY="197dp" />
+            tools:layout_editor_absoluteY="197dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/etUsername"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:id="@+id/etPasswordConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/etPassword"
+            android:layout_alignStart="@+id/etPassword"
+            android:layout_below="@+id/etPassword"
+            android:layout_marginTop="26dp"
+            android:backgroundTint="@color/colorAccent"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:textColor="@color/colorTextPrimary"
+            android:textColorHighlight="@color/colorTextPrimary"
+            android:textColorHint="@color/colorTextPrimary" />
 
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/btnChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
 </android.support.constraint.ConstraintLayout>

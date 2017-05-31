@@ -34,8 +34,16 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_train_color);
         ButterKnife.bind(this);
 
-        greenLine.setOnClickListener(this);
+        Button[] trainNameArray = {greenLine, blueLine, redLine, yellowLine, orangeLine, greenToClackamas, greenToCityCenter, blueToGresham, blueToHillsboro,
+                redToAirport, redToBeaverton, orangeToMilwaukie, orangeToCityCenter, yellowToCityCenter, yellowToExpo};
+        setButtonOnClickListener(trainNameArray);
 
+    }
+
+    public void setButtonOnClickListener(Button[] trainNameArray) {
+        for(int i = 0; i < trainNameArray.length; i++) {
+            trainNameArray[i].setOnClickListener(this);
+        }
     }
 
     @Override

@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.btnRegister) Button btnRegister;
     @Bind(R.id.etUsername) EditText etUsername;
     @Bind(R.id.etPassword) EditText etPassword;
-    @Bind(R.id.btnChange) Button btnChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnLogIn.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
-        btnChange.setOnClickListener(this);
     }
 
     @Override
@@ -39,9 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (v == btnRegister) {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-            startActivity(intent);
-        } else if (v == btnChange) {
-            Intent intent = new Intent(MainActivity.this, CardFlipActivity.class);
             startActivity(intent);
         }
     }

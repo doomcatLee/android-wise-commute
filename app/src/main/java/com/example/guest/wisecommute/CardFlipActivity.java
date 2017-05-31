@@ -88,8 +88,6 @@ public class CardFlipActivity extends Activity implements View.OnClickListener {
      * A fragment representing the front of the card.
      */
     public static class CardFrontFragment extends Fragment {
-        public CardFrontFragment() {
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,8 +100,6 @@ public class CardFlipActivity extends Activity implements View.OnClickListener {
      * A fragment representing the back of the card.
      */
     public static class CardBackFragment extends Fragment {
-        public CardBackFragment() {
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,

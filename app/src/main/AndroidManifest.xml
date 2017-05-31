@@ -22,7 +22,6 @@
         </activity>
         <activity android:name=".TrainColorActivity" />
         <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".CardFlipActivity"></activity>
     </application>
 
 </manifest>

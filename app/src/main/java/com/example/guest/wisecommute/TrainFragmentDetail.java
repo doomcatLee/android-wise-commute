@@ -1,5 +1,6 @@
 package com.example.guest.wisecommute;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,21 +17,21 @@ import org.w3c.dom.Text;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static android.R.attr.fragment;
+
 /**
  * Created by Guest on 5/31/17.
  */
 
-public class TrainFragmentDetail {
-    @Bind(R.id.tvTrainDirection) TextView tvTrainDirection;
+public class TrainFragmentDetail extends Fragment {
+    @Bind(R.id.tvStopName) TextView tvStopName;
 
     private Train mTrain;
 
-    // returns new instance of RestaurantDetailFragment it takes a restaurant object as an argument
-    // What is a bundle??
     public static TrainFragmentDetail newInstance(Train train) {
         TrainFragmentDetail trainFragmentDetail = new TrainFragmentDetail();
         Bundle args = new Bundle();
-        args.putParcelable("restaurant", Parcels.wrap(train));
+        args.putParcelable("train", Parcels.wrap(train));
         trainFragmentDetail.setArguments(args);
         return trainFragmentDetail;
     }
@@ -46,7 +47,7 @@ public class TrainFragmentDetail {
         View view = inflater.inflate(R.layout.fragment_train_detail, container, false);
         ButterKnife.bind(this, view);
 
-        tvTrainStop.setText(mTrain.getStopName());
+        tvStopName.setText(mTrain.getShortSign());
 
 
         return view;

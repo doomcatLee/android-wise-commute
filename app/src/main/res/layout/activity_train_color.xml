@@ -7,167 +7,246 @@
     tools:context="com.example.guest.wisecommute.TrainColorActivity">
 
     <GridLayout
+        android:id="@+id/gridLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/greenToClackamas"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
+        <FrameLayout
+            android:id="@+id/flGreen"
+            android:layout_width="205dp"
+            android:layout_height="200dp"
             android:layout_column="0"
             android:layout_row="0"
-            android:layout_marginTop="45dp"
-            android:layout_marginLeft="30dp" />
-        <Button
-            android:id="@+id/greenToCityCenter"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
-            android:layout_column="0"
-            android:layout_row="0"
-            android:layout_marginTop="95dp"
-            android:layout_marginLeft="30dp" />
+            android:background="#009688">
 
-        <Button
-            android:id="@+id/blueToGresham"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
+            <Button
+                android:id="@+id/greenToClackamas"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="45dp"
+                android:layout_row="0"
+                android:text="To Clackamas"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/greenToCityCenter"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="95dp"
+                android:layout_row="0"
+                android:text="To City Center"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/greenLine"
+                android:layout_width="205dp"
+                android:layout_height="200dp"
+                android:layout_column="0"
+                android:layout_gravity="left|top"
+                android:layout_row="0"
+                android:background="#009688"
+                android:text="Green Line"
+                android:textColor="#fff"
+                android:textSize="19sp" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flBlue"
+            android:layout_width="205dp"
+            android:layout_height="200dp"
             android:layout_column="1"
             android:layout_row="0"
-            android:layout_marginTop="45dp"
-            android:layout_marginLeft="30dp" />
-        <Button
-            android:id="@+id/blueToHillsboro"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:layout_marginTop="95dp"
-            android:layout_marginLeft="30dp"
-            />
+            android:background="#2196F3">
 
-        <Button
-            android:id="@+id/redToAirport"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
+            <Button
+                android:id="@+id/blueToHillsboro"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="95dp"
+                android:layout_row="0"
+                android:text="To Hillsboro"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/blueToGresham"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="45dp"
+                android:layout_row="0"
+                android:text="To Gresham"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/blueLine"
+                android:layout_width="205dp"
+                android:layout_height="200dp"
+                android:layout_column="1"
+                android:layout_gravity="left|top"
+                android:layout_row="0"
+                android:background="#2196F3"
+                android:text="Blue Line"
+                android:textColor="#fff"
+                android:textSize="19sp" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flRed"
+            android:layout_width="205dp"
+            android:layout_height="200dp"
             android:layout_column="0"
             android:layout_row="1"
-            android:layout_marginTop="45dp"
-            android:layout_marginLeft="30dp" />
-        <Button
-            android:id="@+id/redToBeaverton"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
-            android:layout_column="0"
-            android:layout_row="1"
-            android:layout_marginTop="95dp"
-            android:layout_marginLeft="30dp"
-            />
+            android:background="#F44336">
 
-        <Button
-            android:id="@+id/yellowToExpo"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:layout_marginTop="45dp"
-            android:layout_marginLeft="30dp" />
-        <Button
-            android:id="@+id/yellowToCityCenter"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:layout_marginTop="95dp"
-            android:layout_marginLeft="30dp"
-            />
+            <Button
+                android:id="@+id/redToBeaverton"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="95dp"
+                android:layout_row="1"
+                android:text="To Beaverton"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/orangeToMilwaukie"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
+            <Button
+                android:id="@+id/redToAirport"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="45dp"
+                android:layout_row="1"
+                android:text="To Airport"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/redLine"
+                android:layout_width="205dp"
+                android:layout_height="200dp"
+                android:layout_column="0"
+                android:layout_gravity="left|top"
+                android:layout_row="1"
+                android:background="#F44336"
+                android:text="Red Line"
+                android:textColor="#fff"
+                android:textSize="19sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flYellow"
+            android:layout_width="205dp"
+            android:layout_height="200dp"
+            android:background="#FFEB3B">
+
+            <Button
+                android:id="@+id/yellowToCityCenter"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="95dp"
+                android:layout_row="1"
+                android:text="To City Center"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/yellowToExpo"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="45dp"
+                android:layout_row="1"
+                android:text="To Expo"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/yellowLine"
+                android:layout_width="205dp"
+                android:layout_height="200dp"
+                android:layout_column="1"
+                android:layout_gravity="left|top"
+                android:layout_row="1"
+                android:background="#FFEB3B"
+                android:text="Yellow Line"
+                android:textColor="#fff"
+                android:textSize="19sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/flOrange"
+            android:layout_width="205dp"
+            android:layout_height="200dp"
             android:layout_column="0"
             android:layout_row="2"
-            android:layout_marginTop="45dp"
-            android:layout_marginLeft="30dp" />
-        <Button
-            android:id="@+id/orangeToCityCenter"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="To Clackamas"
-            android:layout_column="0"
-            android:layout_row="2"
-            android:layout_marginTop="95dp"
-            android:layout_marginLeft="30dp"
-            />
+            android:background="#FF9800">
 
-        <Button
-            android:id="@+id/greenLine"
-            android:layout_width="192dp"
-            android:layout_height="170dp"
-            android:layout_column="0"
-            android:layout_gravity="left|top"
-            android:layout_row="0"
-            android:text="Green Line" />
+            <Button
+                android:id="@+id/orangeToCityCenter"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="95dp"
+                android:layout_row="2"
+                android:text="To City Center"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/redLine"
-            android:layout_width="192dp"
-            android:layout_height="170dp"
-            android:layout_column="0"
-            android:layout_gravity="left|top"
-            android:layout_row="1"
-            android:text="Red Line" />
+            <Button
+                android:id="@+id/orangeToMilwaukie"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="45dp"
+                android:layout_row="2"
+                android:text="To Milwaukie"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/blueLine"
-            android:layout_width="192dp"
-            android:layout_height="170dp"
-            android:layout_column="1"
-            android:layout_gravity="left|top"
-            android:layout_row="0"
-            android:text="Blue Line" />
+            <Button
+                android:id="@+id/orangeLine"
+                android:layout_width="205dp"
+                android:layout_height="200dp"
+                android:layout_column="0"
+                android:layout_gravity="left|top"
+                android:layout_row="2"
+                android:background="#FF9800"
+                android:text="Orange Line"
+                android:textColor="#fff"
+                android:textSize="19sp" />
+        </FrameLayout>
 
-        <Button
-            android:id="@+id/yellowLine"
-            android:layout_width="192dp"
-            android:layout_height="170dp"
-            android:layout_column="1"
-            android:layout_gravity="left|top"
-            android:layout_row="1"
-            android:text="Yellow Line" />
+        <FrameLayout
+            android:id="@+id/flWiseCommute"
+            android:layout_width="205dp"
+            android:layout_height="200dp">
 
-        <Button
-            android:id="@+id/orangeLine"
-            android:layout_width="192dp"
-            android:layout_height="170dp"
-            android:layout_column="0"
-            android:layout_gravity="left|top"
-            android:layout_row="2"
-            android:text="Orange Line" />
-
-        <Button
-            android:id="@+id/wiseCommute"
-            android:layout_width="192dp"
-            android:layout_height="170dp"
-            android:layout_column="1"
-            android:layout_gravity="left|top"
-            android:layout_row="2"
-            android:text="Wise Commute" />
+            <Button
+                android:id="@+id/wiseCommute"
+                android:layout_width="205dp"
+                android:layout_height="200dp"
+                android:layout_column="1"
+                android:layout_gravity="left|top"
+                android:layout_row="2"
+                android:background="#607D8B"
+                android:text="Wise Commute"
+                android:textColor="#FFEE58"
+                android:textSize="19sp" />
+        </FrameLayout>
 
     </GridLayout>
 </android.support.constraint.ConstraintLayout>

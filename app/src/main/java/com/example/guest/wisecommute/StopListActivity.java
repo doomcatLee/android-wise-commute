@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +29,9 @@ public class StopListActivity extends AppCompatActivity {
     public static final String TAG = StopListActivity.class.getSimpleName();
     @Bind(R.id.stopListView) ListView mStopListView;
 
+    // hashmap (northbound/southbound -> stopList array)
+    String[] stopNames = {"Gateway", "Lents/Foster", "Holgate"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,7 @@ public class StopListActivity extends AppCompatActivity {
         String trainShortSign = intent.getStringExtra("trainShortSign");
 
 
-//        mStopListView.setAdapter();
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, stopNames);
+        mStopListView.setAdapter(adapter);
     }
 }

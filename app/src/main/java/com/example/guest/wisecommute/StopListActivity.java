@@ -27,7 +27,8 @@ import okhttp3.Response;
 public class StopListActivity extends AppCompatActivity {
 
     public static final String TAG = StopListActivity.class.getSimpleName();
-    @Bind(R.id.stopListView) ListView mStopListView;
+    @Bind(R.id.stopListView) ListView lvStopList;
+    @Bind(R.id.tvTrainDirectionFullSign) TextView tvTrainDirectionFullSign;
 
     // hashmap (northbound/southbound -> stopList array)
     String[] stopNames = {"Gateway", "Lents/Foster", "Holgate"};
@@ -41,10 +42,12 @@ public class StopListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String trainColor = intent.getStringExtra("trainColor");
         String trainDirection = intent.getStringExtra("trainDirection");
+        String trainDirectionFullSign = intent.getStringExtra("trainDirectionFullSign");
         String trainShortSign = intent.getStringExtra("trainShortSign");
 
+        tvTrainDirectionFullSign.setText(trainDirectionFullSign);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, stopNames);
-        mStopListView.setAdapter(adapter);
+        lvStopList.setAdapter(adapter);
     }
 }

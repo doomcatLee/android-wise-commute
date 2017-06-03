@@ -41,10 +41,17 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
         Button[] trainNameArray = {greenLine, blueLine, redLine, yellowLine, orangeLine, greenToClackamas, greenToCityCenter, blueToGresham, blueToHillsboro,
                 redToAirport, redToBeaverton, orangeToMilwaukie, orangeToCityCenter, yellowToCityCenter, yellowToExpo};
         setButtonOnClickListener(trainNameArray);
+        setVisibilityOnInitialTrainButtonsOnLoad(trainNameArray);
+    }
 
-//        View grid1 = (View) gridLayout.getChildAt(1);
-//        grid1.setBackgroundColor(Color.GREEN);
-
+    public void setVisibilityOnInitialTrainButtonsOnLoad(Button[] trainLine) {
+        for(int i = 0; i < trainLine.length; i++) {
+            if(i < 5) {
+                trainLine[i].setVisibility(View.VISIBLE);
+            } else {
+                trainLine[i].setVisibility(View.GONE);
+            }
+        }
     }
 
     public void setButtonOnClickListener(Button[] trainNameArray) {
@@ -63,13 +70,15 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "green");
             intent.putExtra("trainDirection", "clackamas");
-            intent.putExtra("trainShortSign", "Green Line to Clackamas");
+            intent.putExtra("trainDirectionFullSign", "Green Line to Clackamas");
+            intent.putExtra("trainShortSign", "green line to clackamas");
             startActivity(intent);
         } else if (v == greenToCityCenter) {
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "green");
             intent.putExtra("trainDirection", "city center");
-            intent.putExtra("trainShortSign", "Green Line to City Ctr");
+            intent.putExtra("trainDirectionFullSign", "Green Line to City Center");
+            intent.putExtra("trainShortSign", "green line to city ctr");
             startActivity(intent);
         } else if (v == blueLine) {
             blueLine.setVisibility(View.GONE);
@@ -79,13 +88,15 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "blue");
             intent.putExtra("trainDirection", "hillsboro");
-            intent.putExtra("trainShortSign", "Blue to Hillsboro");
+            intent.putExtra("trainDirectionFullSign", "Blue Line to Hillsboro");
+            intent.putExtra("trainShortSign", "blue to hillsboro");
             startActivity(intent);
         } else if (v == blueToGresham) {
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "blue");
             intent.putExtra("trainDirection", "gresham");
-            intent.putExtra("trainShortSign", "Blue to Gresham");
+            intent.putExtra("trainDirectionFullSign", "Blue Line to Gresham");
+            intent.putExtra("trainShortSign", "blue to gresham");
             startActivity(intent);
         } else if (v == redLine) {
             redLine.setVisibility(View.GONE);
@@ -95,13 +106,15 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "red");
             intent.putExtra("trainDirection", "airport");
-            intent.putExtra("trainShortSign", "Red to Airport");
+            intent.putExtra("trainDirectionFullSign", "Red Line to Airport");
+            intent.putExtra("trainShortSign", "red to airport");
             startActivity(intent);
         } else if (v == redToBeaverton) {
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "red");
             intent.putExtra("trainDirection", "beaverton");
-            intent.putExtra("trainShortSign", "Red Line to Beaverton");
+            intent.putExtra("trainDirectionFullSign", "Red Line to Beaverton");
+            intent.putExtra("trainShortSign", "red line to beaverton");
             startActivity(intent);
         } else if (v == orangeLine) {
             orangeLine.setVisibility(View.GONE);
@@ -111,13 +124,15 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "orange");
             intent.putExtra("trainDirection", "milwaukie");
-            intent.putExtra("trainShortSign", "Orange Line to Milwaukie");
+            intent.putExtra("trainDirectionFullSign", "Orange Line to Milwaukie");
+            intent.putExtra("trainShortSign", "orange Line to milwaukie");
             startActivity(intent);
         } else if (v == orangeToCityCenter) {
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "orange");
             intent.putExtra("trainDirection", "city center");
-            intent.putExtra("trainShortSign", "Orange Line to City Ctr\\/Expo"); // may cause issues
+            intent.putExtra("trainDirectionFullSign", "Orange Line to City Center/Expo");
+            intent.putExtra("trainShortSign", "orange line to city ctr\\/expo"); // may cause issues
             startActivity(intent);
         } else if (v == yellowLine) {
             yellowLine.setVisibility(View.GONE);
@@ -127,13 +142,15 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "yellow");
             intent.putExtra("trainDirection", "expo");
-            intent.putExtra("trainShortSign", "Yellow Line to Expo Ctr");
+            intent.putExtra("trainDirectionFullSign", "Yellow Line to Expo Center");
+            intent.putExtra("trainShortSign", "yellow line to expo ctr");
             startActivity(intent);
         } else if (v == yellowToCityCenter) {
             Intent intent = new Intent(TrainColorActivity.this, StopListActivity.class);
             intent.putExtra("trainColor", "yellow");
             intent.putExtra("trainDirection", "city center");
-            intent.putExtra("trainShortSign", "Yellow Line to City Ctr\\/Milw"); // may cause issues
+            intent.putExtra("trainDirectionFullSign", "Yellow Line to City Center/Milwaukie");
+            intent.putExtra("trainShortSign", "yellow line to city ctr\\/milw"); // may cause issues
             startActivity(intent);
         }
     }

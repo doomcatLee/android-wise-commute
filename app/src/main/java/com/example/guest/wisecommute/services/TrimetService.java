@@ -58,7 +58,7 @@ public class TrimetService {
                 JSONObject trimetJSON = new JSONObject(json);
                 JSONArray arrivalJSON = trimetJSON.getJSONObject("resultSet").getJSONArray("arrival");
                 for(int i = 0; i <= arrivalJSON.length(); i++) {
-                    JSONObject trainJSON = arrivalJSON.getJSONObject(i);
+                    JSONObject trainJSON = arrivalJSON.getJSONObject(i);minor
 
                     // pull out all the train info
                     String shortSign = trainJSON.getString("shortSign");

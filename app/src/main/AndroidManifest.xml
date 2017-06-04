@@ -23,7 +23,8 @@
         <activity android:name=".TrainColorActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".StopListActivity" />
-        <activity android:name=".ArrivalListActivity"></activity>
+        <activity android:name=".ArrivalListActivity" />
+        <activity android:name=".TrainArrivalActivity"></activity>
     </application>
 
 </manifest>

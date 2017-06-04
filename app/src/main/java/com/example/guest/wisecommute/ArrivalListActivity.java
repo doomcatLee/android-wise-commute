@@ -44,7 +44,8 @@ public class ArrivalListActivity extends AppCompatActivity {
 
     private void getTrains(String trainColor, String trainDirection, String trainShortSign) {
         final TrimetService trimetService = new TrimetService();
-        trimetService.findArrivals(trainColor, trainDirection, trainShortSign, new Callback() {
+        String trainStopID = "123";
+        trimetService.findArrivals(trainColor, trainStopID, trainDirection, trainShortSign, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -75,13 +76,6 @@ public class ArrivalListActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-                try {
-                    String jsonData = response.body().string();
-                    Log.d(TAG, jsonData);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
     }

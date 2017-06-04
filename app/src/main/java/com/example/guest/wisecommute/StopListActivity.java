@@ -1,28 +1,16 @@
 package com.example.guest.wisecommute;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.guest.wisecommute.adapters.TrainListAdapter;
-import com.example.guest.wisecommute.models.Train;
-import com.example.guest.wisecommute.services.TrimetService;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class StopListActivity extends AppCompatActivity {
 
@@ -40,14 +28,27 @@ public class StopListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        String trainColor = intent.getStringExtra("trainColor");
-        String trainDirection = intent.getStringExtra("trainDirection");
-        String trainDirectionFullSign = intent.getStringExtra("trainDirectionFullSign");
-        String trainShortSign = intent.getStringExtra("trainShortSign");
+        final String trainColor = intent.getStringExtra("trainColor");
+        final String trainDirection = intent.getStringExtra("trainDirection");
+        final String trainDirectionFullSign = intent.getStringExtra("trainDirectionFullSign");
+        final String trainShortSign = intent.getStringExtra("trainShortSign");
 
         tvTrainDirectionFullSign.setText(trainDirectionFullSign);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, stopNames);
         lvStopList.setAdapter(adapter);
+
+        lvStopList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(StopListActivity.this, TrainFragmentDetail.class);
+                intent.putExtra("trainColor", trainColor);
+                intent.putExtra("stopName", ((TextView)view).getText());
+                intent.putExtra("trainDirection", trainDirection);
+                intent.putExtra("trainDirectionFullSign", trainDirectionFullSign);
+                intent.putExtra("trainShortSign", trainShortSign);
+                startActivity(intent);
+            }
+        });
     }
 }

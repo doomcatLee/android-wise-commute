@@ -1,23 +1,19 @@
 package com.example.guest.wisecommute;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guest.wisecommute.models.Train;
-import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
-import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-import static android.R.attr.fragment;
 
 /**
  * Created by Guest on 5/31/17.
@@ -47,8 +43,9 @@ public class TrainFragmentDetail extends Fragment {
         View view = inflater.inflate(R.layout.fragment_train_detail, container, false);
         ButterKnife.bind(this, view);
 
-        tvStopName.setText(mTrain.getShortSign());
-
+        Intent intent = getActivity().getIntent();
+        String stopName = intent.getStringExtra("stopName");
+        tvStopName.setText(stopName);
 
         return view;
     }

@@ -16,10 +16,6 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
-import se.akerfeldt.okhttp.signpost.SigningInterceptor;
-
-import static android.R.attr.name;
 
 /**
  * Created by Guest on 5/31/17.
@@ -27,7 +23,7 @@ import static android.R.attr.name;
 
 public class TrimetService {
 
-    public static void findArrivals(String trainColor, String stopID, String trainDirection, Callback callback) {
+    public static void findArrivals(String trainColor, String trainStopID, String trainDirection, String trainShortSign, Callback callback) {
 
         // Set up our credentials
         OkHttpClient client = new OkHttpClient.Builder()
@@ -35,7 +31,7 @@ public class TrimetService {
 
         // Set up the URL
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.API_BASE_URL).newBuilder();
-        urlBuilder.addQueryParameter(Constants.STOP_QUERY_ID, stopID);
+        urlBuilder.addQueryParameter(Constants.STOP_QUERY_ID, trainStopID);
         urlBuilder.addQueryParameter(Constants.API_FORMAT, "true");
         urlBuilder.addQueryParameter(Constants.API_KEY_QUERY_PARAMETER, Constants.API_KEY);
         String url = urlBuilder.build().toString();

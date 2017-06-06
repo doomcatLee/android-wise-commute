@@ -246,27 +246,22 @@ public class Constants {
     };
 
     public static final Stop[] yellowToCityCenterStops = {
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
+            new Stop("Expo Center", "11498"),
+            new Stop("Delta Park/Vanport", "11499"),
+            new Stop("Kenton/N Denver Ave", "11500"),
+            new Stop("N Lombard TC", "11501"),
+            new Stop("Rosa Parks", "11502"),
+            new Stop("N Killingsworth St", "11503"),
+            new Stop("N Prescott St", "11504"),
+            new Stop("Overlook Park", "11505"),
+            new Stop("Albina/Mississippi", "11506"),
+            new Stop("Rose Quarter/Interstate", "11507"),
+            new Stop("Union Station/NW 5th & Glisan", "7601"),
+            new Stop("NW 5th & Couch", "9303"),
+            new Stop("SW 5th & Oak", "7627"),
+            new Stop("Pioneer Place/SW 5th Ave", "7646"),
+            new Stop("City Hall/SW 5th & Jefferson", "7608"),
+            new Stop("PSU Urban Center/SW 5th & Mill", "7618")
     };
 
     public static final Stop[] orangeToCityCenterStops = {

@@ -3,7 +3,6 @@ package com.example.guest.wisecommute;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -58,8 +57,6 @@ public class StopListActivity extends AppCompatActivity {
             setStopList(Constants.yellowToCityCenterStops);
         }
 
-        Log.d(TAG, "onCreate: stopList is " + stopList.toString());
-
         tvTrainDirectionFullSign.setText(trainDirectionFullSign);
 
         StopAdapter stopAdapter = new StopAdapter(this, stopList);
@@ -68,9 +65,14 @@ public class StopListActivity extends AppCompatActivity {
         lvStopList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Stop data = (Stop) parent.getItemAtPosition(position);
+                String stopID = data.getStopId();
+                String stopName = data.getStopName();
+
                 Intent intent = new Intent(StopListActivity.this, TrainArrivalActivity.class);
                 intent.putExtra("trainColor", trainColor);
-                intent.putExtra("stopName", ((TextView)view).getText());
+                intent.putExtra("stopName", stopName);
+                intent.putExtra("stopID", stopID);
                 intent.putExtra("trainDirection", trainDirection);
                 intent.putExtra("trainDirectionFullSign", trainDirectionFullSign);
                 intent.putExtra("trainShortSign", trainShortSign);

@@ -44,4 +44,20 @@ public class Train {
     public int getLocID() {
         return locID;
     }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "shortSign='" + shortSign + '\'' +
+                ", fullSign='" + fullSign + '\'' +
+                ", estimated=" + estimated +
+                ", scheduled=" + scheduled +
+                ", id='" + id + '\'' +
+                ", locID=" + locID +
+                '}';
+    }
+
+    public void getDelay() {
+        // do math between estimated and scheduled time
+    }
 }

@@ -39,6 +39,7 @@ public class TrimetService {
         urlBuilder.addQueryParameter(Constants.API_FORMAT, "true");
         urlBuilder.addQueryParameter(Constants.API_KEY_QUERY_PARAMETER, Constants.API_KEY);
         String url = urlBuilder.build().toString();
+        Log.d(TAG, "findArrivals: url = " + url);
 
         // put the url above into a request
         Request request = new Request.Builder()

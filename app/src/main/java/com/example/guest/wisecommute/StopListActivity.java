@@ -41,7 +41,7 @@ public class StopListActivity extends AppCompatActivity {
         lvStopList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(StopListActivity.this, TrainFragmentDetail.class);
+                Intent intent = new Intent(StopListActivity.this, TrainArrivalActivity.class);
                 intent.putExtra("trainColor", trainColor);
                 intent.putExtra("stopName", ((TextView)view).getText());
                 intent.putExtra("trainDirection", trainDirection);

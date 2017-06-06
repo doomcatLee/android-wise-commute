@@ -246,7 +246,6 @@ public class Constants {
             new Stop("", ""),
             new Stop("", ""),
             new Stop("", ""),
-            new Stop("", ""),
     };
 
     public static final Stop[] yellowToCityCenterStops = {
@@ -271,36 +270,24 @@ public class Constants {
             new Stop("", ""),
             new Stop("", ""),
             new Stop("", ""),
-            new Stop("", ""),
     };
 
     public static final Stop[] orangeToCityCenterStops = {
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
-            new Stop("", ""),
+            new Stop("SE Park Ave", "13720"),
+            new Stop("Milwaukie/Main St", "13721"),
+            new Stop("SE Tacoma/Johnson Creek", "13722"),
+            new Stop("SE Bybee Blvd", "13723"),
+            new Stop("SE 17th Ave & Holgate Blvd", "13724"),
+            new Stop("SE 17th Ave & Rhine St", "13725"),
+            new Stop("Clinton St/SE 12th Ave", "13726"),
+            new Stop("OMSI/SE Water", "13727"),
+            new Stop("South Waterfront/SW Moody Ave", "13728"),
+            new Stop("Lincoln St/SW 3rd Ave", "13729"),
+            new Stop("PSU South/SW 6th & College", "10293")
     };
 
     public static final Stop[] orangeToMilwaukieStops = {
-            new Stop("", ""),
+            new Stop("Union Station/NW 5th & Glisan", "7601"),
             new Stop("", ""),
             new Stop("", ""),
             new Stop("", ""),

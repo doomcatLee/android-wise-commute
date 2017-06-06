@@ -1,7 +1,6 @@
 package com.example.guest.wisecommute.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +17,14 @@ import java.util.ArrayList;
  */
 
 public class StopAdapter extends ArrayAdapter<Stop> {
-    private static final String TAG = "StopAdapter";
+    private static final String TAG = StopAdapter.class.getSimpleName();
 
     public StopAdapter(Context context, ArrayList<Stop> stops) {
         super(context, 0, stops);
-        Log.d(TAG, "StopAdapter: stops is " + stops);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d(TAG, "getView: starts");
         // grab current stop object
         Stop stop = getItem(position);
 
@@ -44,7 +41,6 @@ public class StopAdapter extends ArrayAdapter<Stop> {
         tvStopName.setText(stop.getStopName());
         tvStopID.setText(stop.getStopId());
 
-        Log.d(TAG, "getView: ends");
         return convertView;
     }
 }

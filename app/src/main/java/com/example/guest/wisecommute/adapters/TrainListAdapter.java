@@ -46,7 +46,11 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.Trai
 
     // ViewHolder will find the views and set their values for the item in the list
     public class TrainViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tvStopName) TextView tvStopName;
+        @Bind(R.id.tvTrainName) TextView tvTrainName;
+        @Bind(R.id.tvDelay) TextView tvDelay;
+        @Bind(R.id.tvEstimated) TextView tvEstimated;
+        @Bind(R.id.tvScheduled) TextView tvScheduled;
+
         private Context mContext;
 
         public TrainViewHolder(View itemView) {
@@ -56,7 +60,10 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.Trai
         }
 
         public void bindTrain(Train train) {
-            tvStopName.setText(train.getShortSign());
+            tvTrainName.setText(train.getFullSign());
+            tvDelay.setText("N/A");
+            tvEstimated.setText(train.getEstimated());
+            tvScheduled.setText(train.getScheduled());
         }
     }
 }

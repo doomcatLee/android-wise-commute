@@ -29,43 +29,49 @@ public class TrainArrivalActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: starts");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train_arrival);
         ButterKnife.bind(this);
 
+        // set up the adapter..
+        mAdapter = new TrainListAdapter(getApplicationContext(), mTrains);
+        mRecyclerView.setAdapter(mAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TrainArrivalActivity.this);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+
         Intent intent = getIntent();
         String trainColor = intent.getStringExtra("trainColor");
         String trainDirection = intent.getStringExtra("trainDirection");
-        String trainStopID = intent.getStringExtra("trainStopID");
+        String trainStopID = intent.getStringExtra("stopID");
+        String stopName = intent.getStringExtra("stopName");
         String trainDirectionFullSign = intent.getStringExtra("trainDirectionFullSign");
         String trainShortSign = intent.getStringExtra("trainShortSign");
 
         getTrains(trainColor, trainStopID, trainDirection, trainShortSign);
 
+        Log.d(TAG, "onCreate: ends");
     }
 
     private void getTrains(String trainColor, String trainStopID, String trainDirection, String trainShortSign) {
+        Log.d(TAG, "getTrains: starts");
         final TrimetService trimetService = new TrimetService();
         trimetService.findArrivals(trainColor, trainStopID, trainDirection, trainShortSign, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                Log.e(TAG, "onFailure: API Call failed with " + e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                Log.d(TAG, "onResponse: starts");
                 mTrains = trimetService.processResults(response);
-                System.out.println(mTrains);
 
                 TrainArrivalActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mAdapter = new TrainListAdapter(getApplicationContext(), mTrains);
-                        // no adapter attached error
-                        mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TrainArrivalActivity.this);
-                        mRecyclerView.setLayoutManager(layoutManager);
-                        mRecyclerView.setHasFixedSize(true);
 
                         for(Train train : mTrains) {
                             Log.d(TAG, "ShortSign: " + train.getShortSign());
@@ -84,7 +90,9 @@ public class TrainArrivalActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                Log.d(TAG, "onResponse: ends");
             }
         });
+        Log.d(TAG, "getTrains: ends");
     }
 }

@@ -40,6 +40,8 @@ public class TrainArrivalActivity extends AppCompatActivity {
         String trainDirectionFullSign = intent.getStringExtra("trainDirectionFullSign");
         String trainShortSign = intent.getStringExtra("trainShortSign");
 
+        getTrains(trainColor, trainStopID, trainDirection, trainShortSign);
+
     }
 
     private void getTrains(String trainColor, String trainStopID, String trainDirection, String trainShortSign) {
@@ -53,11 +55,13 @@ public class TrainArrivalActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 mTrains = trimetService.processResults(response);
+                System.out.println(mTrains);
 
                 TrainArrivalActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mAdapter = new TrainListAdapter(getApplicationContext(), mTrains);
+                        // no adapter attached error
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TrainArrivalActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);

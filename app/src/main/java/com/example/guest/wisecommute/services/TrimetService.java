@@ -1,5 +1,7 @@
 package com.example.guest.wisecommute.services;
 
+import android.util.Log;
+
 import com.example.guest.wisecommute.Constants;
 import com.example.guest.wisecommute.models.Train;
 
@@ -16,6 +18,8 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.example.guest.wisecommute.StopListActivity.TAG;
 
 /**
  * Created by Guest on 5/31/17.
@@ -49,6 +53,7 @@ public class TrimetService {
     }
 
     public ArrayList<Train> processResults(Response response) {
+        Log.d(TAG, "processResults: working");
         ArrayList<Train> trains = new ArrayList<>();
 
         try {

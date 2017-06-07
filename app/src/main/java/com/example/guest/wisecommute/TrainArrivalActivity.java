@@ -13,11 +13,7 @@ import com.example.guest.wisecommute.models.Train;
 import com.example.guest.wisecommute.services.TrimetService;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.TimeZone;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -85,22 +81,31 @@ public class TrainArrivalActivity extends AppCompatActivity {
                         for(Train train : mTrains) {
                             Log.d(TAG, "ShortSign: " + train.getShortSign());
                             Log.d(TAG, "FullSign: " + train.getFullSign());
-                            Long estimated = Long.parseLong(train.getEstimated());
-                            Date startDate = new Date();
-                            Date date = new Date(estimated);
-                            long difference = date.getTime() - startDate.getTime();
-                            Date differenceDate = new Date(difference);
-                            DateFormat format = new SimpleDateFormat("mm");
-                            format.setTimeZone(TimeZone.getTimeZone("UTC-8:00"));
-                            String estimatedMinutes = format.format(differenceDate);
-                            Log.d(TAG, "Estimated: " + estimatedMinutes + " minutes");
+//                            Long estimated = Long.parseLong(train.getEstimated());
+//                            Date startDate = new Date();
+//                            Date date = new Date(estimated);
+//                            long difference = date.getTime() - startDate.getTime();
+//                            Date differenceDate = new Date(difference);
+//                            DateFormat format = new SimpleDateFormat("mm");
+//                            format.setTimeZone(TimeZone.getTimeZone("UTC-8:00"));
+//                            String estimatedMinutes = format.format(differenceDate);
+//                            Log.d(TAG, "Estimated: " + estimatedMinutes + " minutes");
+                            Log.d(TAG, train.getEstimatedMinutes());
 
-                            Long scheduled = Long.parseLong(train.getScheduled());
-                            Date scheduledDate = new Date(scheduled);
-                            DateFormat scheduledFormat = new SimpleDateFormat("hh:mm");
-                            scheduledFormat.setTimeZone(TimeZone.getTimeZone("UTC-8:00"));
-                            String scheduledMinutes = scheduledFormat.format(scheduledDate);
-                            Log.d(TAG, "Scheduled to arrive at " + scheduledMinutes);
+//                            /** Scheduled Time (hours) */
+//                            Long scheduled = Long.parseLong(train.getScheduled());
+//                            Date scheduledDate = new Date(scheduled);
+//                            DateFormat scheduledHoursFormat = new SimpleDateFormat("hh");
+//                            scheduledHoursFormat.setTimeZone(TimeZone.getTimeZone("PST"));
+//                            String scheduledHours = scheduledHoursFormat.format(scheduledDate);
+//                            Integer convertedHours = Integer.parseInt(scheduledHours) + 5;
+//
+//                            /** Scheduled Time (minutes) */
+//                            DateFormat scheduledMinutesFormat = new SimpleDateFormat("mm");
+//                            scheduledMinutesFormat.setTimeZone(TimeZone.getTimeZone("PST"));
+//                            String scheduledMinutes = scheduledMinutesFormat.format(scheduledDate);
+
+                            Log.d(TAG, train.getScheduledTime());
 
                             Log.d(TAG, "StopID: " + train.getLocID());
                         }

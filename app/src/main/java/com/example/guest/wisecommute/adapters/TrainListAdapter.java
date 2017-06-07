@@ -62,8 +62,8 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.Trai
         public void bindTrain(Train train) {
             tvTrainName.setText(train.getFullSign());
             tvDelay.setText("N/A");
-            tvEstimated.setText(train.getEstimated() + "");
-            tvScheduled.setText(train.getScheduled() + "");
+            tvEstimated.setText("Estimated: " + train.getEstimatedMinutes() + "");
+            tvScheduled.setText("Scheduled: " + train.getScheduledTime() + "");
         }
     }
 }

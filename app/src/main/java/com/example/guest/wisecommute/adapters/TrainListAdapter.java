@@ -35,7 +35,7 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.Trai
 
     // updates the contents of the ItemView to reflect the restaurant in the given position
     @Override
-    public void onBindViewHolder(TrainViewHolder holder, int position) {
+    public void onBindViewHolder(TrainListAdapter.TrainViewHolder holder, int position) {
         holder.bindTrain(mTrains.get(position));
     }
 
@@ -62,8 +62,8 @@ public class TrainListAdapter extends RecyclerView.Adapter<TrainListAdapter.Trai
         public void bindTrain(Train train) {
             tvTrainName.setText(train.getFullSign());
             tvDelay.setText("N/A");
-            tvEstimated.setText(train.getEstimated());
-            tvScheduled.setText(train.getScheduled());
+            tvEstimated.setText(train.getEstimated() + "");
+            tvScheduled.setText(train.getScheduled() + "");
         }
     }
 }

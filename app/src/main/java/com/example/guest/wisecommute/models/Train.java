@@ -7,12 +7,12 @@ package com.example.guest.wisecommute.models;
 public class Train {
     private String shortSign;
     private String fullSign;
-    private int estimated;
-    private int scheduled;
+    private String estimated;
+    private String scheduled;
     private String id;
     private int locID;
 
-    public Train(String shortSign, String fullSign, int estimated, int scheduled, String id, int locID) {
+    public Train(String shortSign, String fullSign, String estimated, String scheduled, String id, int locID) {
         this.shortSign = shortSign;
         this.fullSign = fullSign;
         this.estimated = estimated;
@@ -29,11 +29,11 @@ public class Train {
         return fullSign;
     }
 
-    public int getEstimated() {
+    public String getEstimated() {
         return estimated;
     }
 
-    public int getScheduled() {
+    public String getScheduled() {
         return scheduled;
     }
 

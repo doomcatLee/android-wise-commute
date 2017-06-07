@@ -10,6 +10,11 @@ Wise Commute is an application that I've wanted to build from the early days at 
 * Android Studio
 * Java JDK
 
+## Files needed
+* At the root directory, create a file called 'gradle.properties'
+* Add Trimet_API_KEY = "3B5160342487A47D436E90CD9"
+* Click gradle sync
+
 ## How to run
 * Clone this repo
 * Open Android Studio

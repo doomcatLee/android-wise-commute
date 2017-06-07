@@ -2,6 +2,7 @@
 
 #### By: Ryan Jones
 #### Version: 06/06/2017
+#### Ideal Virtual Device: Nexus 6 API 23
 
 ## Description
 Wise Commute is an application that I've wanted to build from the early days at Epicodus. The app will allow users to view train details about current arrivals and also be able to self report on the condition of those trains.

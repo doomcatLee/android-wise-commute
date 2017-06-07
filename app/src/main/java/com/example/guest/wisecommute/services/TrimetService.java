@@ -68,8 +68,8 @@ public class TrimetService {
                     // pull out all the train info
                     String shortSign = trainJSON.getString("shortSign");
                     String fullSign = trainJSON.getString("fullSign");
-                    int estimated = trainJSON.getInt("estimated");
-                    int scheduled = trainJSON.getInt("scheduled");
+                    String estimated = trainJSON.getString("estimated");
+                    String scheduled = trainJSON.getString("scheduled");
                     String id = trainJSON.getString("id");
                     int locID = trainJSON.getInt("locid");
 

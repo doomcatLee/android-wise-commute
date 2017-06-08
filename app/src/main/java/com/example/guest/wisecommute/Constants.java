@@ -44,7 +44,7 @@ public class Constants {
             new Stop("SE Fuller Rd", "13133"),
             new Stop("SE Flavel St", "13134"),
             new Stop("Lents/SE Foster Rd", "13135"),
-            new Stop("SE Holgate Blvd", "13136"),
+            new Stop("SE Holgate Blvd"  , "13136"),
             new Stop("SE Powell Blvd", "13137"),
             new Stop("SE Division St", "13138"),
             new Stop("SE Main St", "13139"),

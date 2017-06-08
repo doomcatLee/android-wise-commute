@@ -3,6 +3,9 @@ package com.example.guest.wisecommute;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -10,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.guest.wisecommute.adapters.StopAdapter;
 import com.example.guest.wisecommute.models.Stop;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -79,6 +83,42 @@ public class StopListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    /** Menu Code */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /** Menu Code */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        } else if (id == R.id.action_settings) {
+            Intent intent = new Intent(StopListActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.action_dashboard) {
+            Intent intent = new Intent(StopListActivity.this, DashboardActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /** Logout Firebase User */
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(StopListActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public void setStopList(Stop[] stops) {

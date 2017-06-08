@@ -5,4 +5,6 @@ package com.example.guest.wisecommute.services;
  */
 
 public class FirebaseService {
+
+
 }

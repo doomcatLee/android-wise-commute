@@ -84,28 +84,28 @@
             tools:layout_editor_absoluteY="385dp" />
 
         <EditText
-            android:id="@+id/etUsername"
+            android:id="@+id/etEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/etPassword"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/etPassword"
             android:layout_marginTop="36dp"
             android:backgroundTint="@color/colorAccent"
             android:ems="10"
-            android:hint="Username"
-            android:inputType="textPersonName"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
             android:textColor="@color/colorTextPrimary"
             android:textColorHighlight="@color/colorTextPrimary"
             android:textColorHint="@color/colorTextPrimary"
             tools:layout_editor_absoluteX="85dp"
-            tools:layout_editor_absoluteY="270dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/etPassword"
-            android:layout_alignStart="@+id/etPassword" />
+            tools:layout_editor_absoluteY="270dp" />
 
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/etUsername"
+            android:layout_below="@+id/etEmail"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
             android:backgroundTint="@color/colorAccent"

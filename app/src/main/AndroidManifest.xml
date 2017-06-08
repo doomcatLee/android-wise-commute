@@ -11,19 +11,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/NoActionBarTheme">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TrainColorActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".StopListActivity" />
-        <activity android:name=".TrainArrivalActivity"></activity>
+        <activity android:name=".TrainColorActivity"/>
+        <activity android:name=".RegisterActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.RegisterActivity" />
+        </activity>
+        <activity android:name=".StopListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.StopListActivity" />
+        </activity>
+        <activity android:name=".TrainArrivalActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.TrainArrivalActivity" />
+        </activity>
+        <activity android:name=".SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.SettingsActivity" />
+        </activity>
+        <activity android:name=".DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.DashboardActivity" />
+        </activity>
     </application>
 
 </manifest>

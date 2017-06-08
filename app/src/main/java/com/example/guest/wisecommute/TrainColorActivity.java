@@ -3,9 +3,14 @@ package com.example.guest.wisecommute;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,6 +43,42 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
                 redToAirport, redToBeaverton, orangeToMilwaukie, orangeToCityCenter, yellowToCityCenter, yellowToExpo};
         setButtonOnClickListener(trainNameArray);
         setVisibilityOnInitialTrainButtonsOnLoad(trainNameArray);
+    }
+
+    /** Menu Code */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /** Menu Code */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        } else if (id == R.id.action_settings) {
+            Intent intent = new Intent(TrainColorActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.action_dashboard) {
+            Intent intent = new Intent(TrainColorActivity.this, DashboardActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /** Logout Firebase User */
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(TrainColorActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public void setVisibilityOnInitialTrainButtonsOnLoad(Button[] trainLine) {

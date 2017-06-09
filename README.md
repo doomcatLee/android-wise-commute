@@ -36,6 +36,8 @@ Wise Commute is an application that I've wanted to build from the early days at 
 * Auto location detection and Google map pin points allowing the user to see close stops
 * Google Ad support
 
+## App Preview
+
 ### Registration
 ![Registration](https://github.com/Znergy/android-wise-commute/blob/master/app/src/main/res/drawable/register.png)
 

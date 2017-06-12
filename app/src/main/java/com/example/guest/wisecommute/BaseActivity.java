@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
 
-//    MainActivity mainActivity = new MainActivity();
+//    LogInActivity mainActivity = new LogInActivity();
 //
 //    /** Menu Code */
 //    @Override

@@ -2,7 +2,6 @@ package com.example.guest.wisecommute;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.guest.wisecommute.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -150,14 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "onSignInComplete: " + task.isSuccessful());
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        String userUid = user.getUid();
-                        String userEmail = user.getEmail();
-                        String userName = user.getDisplayName();
-                        Uri userProfileImage = user.getPhotoUrl();
-
-                        User newUser = new User(userEmail, userName, userUid, userProfileImage);
-                        saveToFirebase(newUser);
                         mAuthProgressDialog.dismiss();
                         if(!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
@@ -165,12 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
-    }
-
-    private void saveToFirebase(User user) {
-        /** Store the user object in our users section of our database */
-        userAccounts.push().setValue(user);
-    }
+    } 
 
 //    @Override
 //    public void searchForMatch(ArrayList<User> users) {

@@ -13,8 +13,20 @@ Wise Commute is an application that I've wanted to build from the early days at 
 
 ## Files needed
 * At the root directory, create a file called 'gradle.properties'
-* Add Trimet_API_KEY = "3B5160342487A47D436E90CD9"
+* Add the following code to 'gradle.properties'
+```
+Trimet_API_KEY = "3B5160342487A47D436E90CD9"
+Twitter_CONSUMER_KEY = "Your_Key_Here"
+Twitter_CONSUMER_SECRET = "Your_Key_Here"
+Twitter_TOKEN_KEY = "Your_Key_Here"
+Twitter_TOKEN_SECRET = "Your_Key_Here"
+```
 * Click gradle sync
+
+## Twitter API
+* Sign up for Twitter's API
+* Create an application
+* Copy Consumer key/secret and Token key/secret to 'gradle.properties'
 
 ## How to run
 * Clone this repo

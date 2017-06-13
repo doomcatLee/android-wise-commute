@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_live_feed:
                     transaction = fragmentManager.beginTransaction();
                     transaction.replace(R.id.content, liveFeedFragment);
-                    transaction.commit();
+                    transaction.commitNow();
                     return true;
             }
             return false;

@@ -61,10 +61,10 @@ public class TwitterAdapter extends RecyclerView.Adapter<TwitterAdapter.TwitterV
         }
 
         public void bindTweet(Tweet tweet) {
-            tvText.setText("Text: " + tweet.getText());
-            tvScreenName.setText("Screen Name: " + tweet.getScreenName());
-            tvName.setText("Name: " + tweet.getUsername());
-            tvTimeStamp.setText("Time: " + tweet.getTimeStamp());
+            tvText.setText(tweet.getText());
+            tvScreenName.setText("@" + tweet.getScreenName());
+            tvName.setText(tweet.getUsername());
+            tvTimeStamp.setText(tweet.getTimeStamp());
         }
     }
 }

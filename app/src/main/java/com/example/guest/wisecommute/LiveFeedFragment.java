@@ -31,9 +31,9 @@ import okhttp3.Response;
  */
 public class LiveFeedFragment extends Fragment {
     private static final String TAG = LiveFeedFragment.class.getSimpleName();
-    @Bind(R.id.twitterRecyclerView) RecyclerView mRecyclerView;
     @Bind(R.id.tvTitle) TextView tvStopName;
     private TwitterAdapter mAdapter;
+    private RecyclerView mRecyclerView;
     private Context mContext;
 
     public ArrayList<Tweet> mTweets = new ArrayList<>();
@@ -47,8 +47,9 @@ public class LiveFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ButterKnife.bind(getActivity());
+        Log.d(TAG, "onCreateView: getActivity " + getActivity());
 
-        getTweets("trimet", "2");
+        getTweets("trimet", "10");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_live_feed, container, false);
     }
@@ -73,11 +74,16 @@ public class LiveFeedFragment extends Fragment {
                     @Override
                     public void run() {
 
+                        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.twitterRecyclerView);
                         mAdapter = new TwitterAdapter(getActivity(), mTweets);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-                        mRecyclerView.setLayoutManager(layoutManager);
-                        mRecyclerView.setHasFixedSize(true);
+                        if(mRecyclerView != null) {
+                            mRecyclerView.setLayoutManager(layoutManager);
+                            mRecyclerView.setHasFixedSize(true);
+                        } else {
+                            Log.d(TAG, "run: RecyclerView is null bro..");
+                        }
 
                         for(Tweet tweet : mTweets) {
                             Log.d(TAG, "Twitter - TimeStamp: " + tweet.getTimeStamp());

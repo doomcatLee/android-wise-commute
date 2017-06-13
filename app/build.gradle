@@ -32,6 +32,10 @@ android {
     }
     buildTypes.each {
         it.buildConfigField 'String', 'Trimet_API_KEY', Trimet_API_KEY
+        it.buildConfigField 'String', 'Twitter_CONSUMER_KEY', Twitter_CONSUMER_KEY
+        it.buildConfigField 'String', 'Twitter_CONSUMER_SECRET', Twitter_CONSUMER_SECRET
+        it.buildConfigField 'String', 'Twitter_TOKEN_KEY', Twitter_TOKEN_KEY
+        it.buildConfigField 'String', 'Twitter_TOKEN_SECRET', Twitter_TOKEN_SECRET
     }
 }
 
@@ -52,6 +56,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'org.parceler:parceler:1.1.6'
 }

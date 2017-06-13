@@ -1,30 +1,43 @@
 package com.example.guest.wisecommute;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
+    private FragmentTransaction transaction;
+    private FragmentManager fragmentManager;
+    private UserPreferenceArrivalFragment userPreferenceArrivalFragment;
+    private LiveFeedFragment liveFeedFragment;
+    private Intent navIntent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            fragmentManager = getSupportFragmentManager();
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                case R.id.navigation_to_from:
+                    fragmentManager = getSupportFragmentManager();
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.content, userPreferenceArrivalFragment);
+                    transaction.commit();
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_all:
+                    navIntent = new Intent(MainActivity.this, TrainColorActivity.class);
+                    startActivity(navIntent);
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                case R.id.navigation_live_feed:
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.content, liveFeedFragment);
+                    transaction.commit();
                     return true;
             }
             return false;
@@ -37,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        userPreferenceArrivalFragment = new UserPreferenceArrivalFragment();
+        liveFeedFragment = new LiveFeedFragment();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

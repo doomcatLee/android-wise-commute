@@ -40,25 +40,25 @@ public class StopListActivity extends AppCompatActivity {
         final String trainShortSign = intent.getStringExtra("trainShortSign");
 
         if (trainColor.equals("green") && trainDirection.equals("clackamas")) {
-            setStopList(Constants.greenToClackamasStops);
+            setStopList(StopConstants.greenToClackamasStops);
         } else if (trainColor.equals("green") && trainDirection.equals("city center")) {
-            setStopList(Constants.greenToCityCenterStops);
+            setStopList(StopConstants.greenToCityCenterStops);
         } else if (trainColor.equals("blue") && trainDirection.equals("hillsboro")) {
-            setStopList(Constants.blueToHillsboroStops);
+            setStopList(StopConstants.blueToHillsboroStops);
         } else if (trainColor.equals("blue") && trainDirection.equals("gresham")) {
-            setStopList(Constants.blueToGreshamStops);
+            setStopList(StopConstants.blueToGreshamStops);
         } else if (trainColor.equals("red") && trainDirection.equals("airport")) {
-            setStopList(Constants.redToAirportStops);
+            setStopList(StopConstants.redToAirportStops);
         } else if (trainColor.equals("red") && trainDirection.equals("beaverton")) {
-            setStopList(Constants.redToBeavertonStops);
+            setStopList(StopConstants.redToBeavertonStops);
         } else if (trainColor.equals("orange") && trainDirection.equals("milwaukie")) {
-            setStopList(Constants.orangeToMilwaukieStops);
+            setStopList(StopConstants.orangeToMilwaukieStops);
         } else if (trainColor.equals("orange") && trainDirection.equals("city center")) {
-            setStopList(Constants.orangeToCityCenterStops);
+            setStopList(StopConstants.orangeToCityCenterStops);
         } else if (trainColor.equals("yellow") && trainDirection.equals("expo")) {
-            setStopList(Constants.yellowToExpoStops);
+            setStopList(StopConstants.yellowToExpoStops);
         } else if (trainColor.equals("yellow") && trainDirection.equals("city center")) {
-            setStopList(Constants.yellowToCityCenterStops);
+            setStopList(StopConstants.yellowToCityCenterStops);
         }
 
         tvTrainDirectionFullSign.setText(trainDirectionFullSign);

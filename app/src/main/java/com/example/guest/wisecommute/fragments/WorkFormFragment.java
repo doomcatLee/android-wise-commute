@@ -13,12 +13,12 @@ import com.example.guest.wisecommute.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link WorkFragment.OnFragmentInteractionListener} interface
+ * {@link WorkFormFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link WorkFragment#newInstance} factory method to
+ * Use the {@link WorkFormFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WorkFragment extends Fragment {
+public class WorkFormFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +30,7 @@ public class WorkFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public WorkFragment() {
+    public WorkFormFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class WorkFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment WorkFragment.
+     * @return A new instance of fragment WorkFormFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WorkFragment newInstance(String param1, String param2) {
-        WorkFragment fragment = new WorkFragment();
+    public static WorkFormFragment newInstance(String param1, String param2) {
+        WorkFormFragment fragment = new WorkFormFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

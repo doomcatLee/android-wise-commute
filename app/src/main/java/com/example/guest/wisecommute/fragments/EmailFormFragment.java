@@ -55,13 +55,7 @@ public class EmailFormFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG, "onClick: Starts");
-//        if (v == mNextButton1) {
-//            Log.d("FUCK","clicked");
-//            Intent intent = new Intent(getActivity(), RegisterActivity.class);
-//            intent.putExtra("showPasswordFragment", "1");
-//        startActivity(intent);
-//        }
+
     }
 
 }

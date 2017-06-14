@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.guest.wisecommute.IntroActivity;
 import com.example.guest.wisecommute.R;
 import com.example.guest.wisecommute.RegisterActivity;
 
@@ -23,6 +25,7 @@ import butterknife.ButterKnife;
 public class EmailFormFragment extends Fragment implements View.OnClickListener{
 
     private TextView mNextButton1;
+    private ImageView mBackButton;
     private EditText mEmailEditText;
     private static final String TAG = EmailFormFragment.class.getSimpleName();
 
@@ -36,6 +39,7 @@ public class EmailFormFragment extends Fragment implements View.OnClickListener{
         ButterKnife.bind(getActivity());
         View view = inflater.inflate(R.layout.fragment_email_form, container, false);
         mNextButton1 = (TextView) view.findViewById(R.id.btnNext2);
+        mBackButton = (ImageView) view.findViewById(R.id.btnBack);
 
         Log.d("Log the button",mNextButton1.getText().toString());
         mNextButton1.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +52,17 @@ public class EmailFormFragment extends Fragment implements View.OnClickListener{
                 }
             }
         });
+
+        mBackButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(v == mBackButton){
+                    Intent intent = new Intent(getActivity(), IntroActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
         Log.d(TAG, "onCreateView: ends");
         return view;
     }

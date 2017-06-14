@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private HomeFormFragment mHomeFormFragment;
     private WorkFormFragment mWorkFormFragment;
 
+
     /**
      * Initialize Fragment trigger
      * 0 = false, 1 = true

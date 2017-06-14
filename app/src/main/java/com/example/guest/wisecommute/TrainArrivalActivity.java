@@ -3,6 +3,8 @@ package com.example.guest.wisecommute;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.AlarmClock;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.guest.wisecommute.adapters.TrainListAdapter;
@@ -32,8 +33,11 @@ public class TrainArrivalActivity extends AppCompatActivity implements View.OnCl
     private static final String TAG = TrainArrivalActivity.class.getSimpleName();
     @Bind(R.id.twitterRecyclerView) RecyclerView mRecyclerView;
     @Bind(R.id.tvStopName) TextView tvStopName;
-    @Bind(R.id.ivAlarm) ImageView ivAlarm;
     private TrainListAdapter mAdapter;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
+    private DashboardFragment dashboardFragment;
 
     private String trainColor;
     private String trainStopID;
@@ -50,6 +54,9 @@ public class TrainArrivalActivity extends AppCompatActivity implements View.OnCl
         ButterKnife.bind(this);
         Log.d(TAG, "onCreate: starts");
 
+        fragmentManager = getSupportFragmentManager();
+        dashboardFragment = new DashboardFragment();
+
         Intent intent = getIntent();
         trainColor = intent.getStringExtra("trainColor");
         trainDirection = intent.getStringExtra("trainDirection");
@@ -59,19 +66,21 @@ public class TrainArrivalActivity extends AppCompatActivity implements View.OnCl
 
         tvStopName.setText(stopName);
 
-        ivAlarm.setOnClickListener(this);
-
-        getTrains(trainColor, trainStopID, trainDirection, trainShortSign);
+        getTrains(trainColor, trainStopID, trainDirection);
 
         Log.d(TAG, "onCreate: ends");
     }
 
     @Override
     public void onClick(View v) {
-        if(v == ivAlarm) {
-            Intent openClockIntent = new Intent(AlarmClock.ACTION_SET_ALARM);
-            openClockIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(openClockIntent);
+
+    }
+
+    public void showDashboardFragment(boolean showDashboardFragment) {
+        if(showDashboardFragment) {
+            transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.content, dashboardFragment);
+            transaction.commit();
         }
     }
 
@@ -95,13 +104,15 @@ public class TrainArrivalActivity extends AppCompatActivity implements View.OnCl
             startActivity(intent);
             finish();
         } else if (id == R.id.action_dashboard) {
-            Intent intent = new Intent(TrainArrivalActivity.this, DashboardActivity.class);
-            startActivity(intent);
-            finish();
+            showDashboardFragment(true);
         } else if (id == R.id.action_refresh) {
             Log.d(TAG, "onOptionsItemSelected: clicked");
             // trigger api call
-            getTrains(trainColor, trainStopID, trainDirection, trainShortSign);
+            getTrains(trainColor, trainStopID, trainDirection);
+        } else if (id == R.id.action_alarm) {
+            Intent openClockIntent = new Intent(AlarmClock.ACTION_SET_ALARM);
+            openClockIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(openClockIntent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -115,10 +126,10 @@ public class TrainArrivalActivity extends AppCompatActivity implements View.OnCl
         finish();
     }
 
-    private void getTrains(String trainColor, String trainStopID, String trainDirection, String trainShortSign) {
+    private void getTrains(String trainColor, String trainStopID, String trainDirection) {
         Log.d(TAG, "getTrains: starts");
         final TrimetService trimetService = new TrimetService();
-        trimetService.findArrivals(trainColor, trainStopID, trainDirection, trainShortSign, new Callback() {
+        trimetService.findArrivals(trainColor, trainStopID, trainDirection, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();

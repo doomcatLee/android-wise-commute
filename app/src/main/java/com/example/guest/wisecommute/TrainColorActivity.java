@@ -2,6 +2,8 @@ package com.example.guest.wisecommute;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,11 +35,18 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
     @Bind(R.id.yellowToCityCenter) Button yellowToCityCenter;
     @Bind(R.id.gridLayout) GridLayout gridLayout;
 
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
+    private DashboardFragment dashboardFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train_color);
         ButterKnife.bind(this);
+
+        dashboardFragment = new DashboardFragment();
+        fragmentManager = getSupportFragmentManager();
 
         Button[] trainNameArray = {greenLine, blueLine, redLine, yellowLine, orangeLine, greenToClackamas, greenToCityCenter, blueToGresham, blueToHillsboro,
                 redToAirport, redToBeaverton, orangeToMilwaukie, orangeToCityCenter, yellowToCityCenter, yellowToExpo};
@@ -65,11 +74,17 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
             startActivity(intent);
             finish();
         } else if (id == R.id.action_dashboard) {
-            Intent intent = new Intent(TrainColorActivity.this, DashboardActivity.class);
-            startActivity(intent);
-            finish();
+            showDashboardFragment(true);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showDashboardFragment(boolean showDashboardFragment) {
+        if(showDashboardFragment) {
+            transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.content, dashboardFragment);
+            transaction.commit();
+        }
     }
 
     /** Logout Firebase User */

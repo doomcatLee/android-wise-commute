@@ -37,7 +37,7 @@ public class HomeFormFragment extends Fragment {
             public void onClick(View v) {
                 if (v == mNextButton) {
                     Intent intent = new Intent(getActivity(), RegisterActivity.class);
-                    intent.putExtra("showHomeFragment", "1");
+                    intent.putExtra("showWorkFragment", "1");
                     startActivity(intent);
                 }
             }

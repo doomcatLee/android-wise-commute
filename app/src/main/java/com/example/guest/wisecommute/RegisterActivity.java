@@ -93,21 +93,36 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Intent i = getIntent();
         showPasswordFragment = i.getStringExtra("showPasswordFragment");
         showHomeFragment = i.getStringExtra("showHomeFragment");
-//        showWorkFragment = i.getStringExtra("showWorkFragment");
+        showWorkFragment = i.getStringExtra("showWorkFragment");
+        Log.d(TAG, "onCreate: SHOW WORK" + showWorkFragment);
 
         /**
-         * On Create, always start EmailFormFragment as the main fragment for register
+         * By Default, always start EmailFormFragment as the main fragment for register
          * */
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.registerContent, mEmailFormFragment);
         transaction.commit();
 
         /**
-         * If condition for HOME FRAGMENT
+         * Work Fragment if condition
+         * */
+        if(showWorkFragment != null){
+            if(showWorkFragment.equals("1")){
+                Log.d(TAG, "onCreate: WORK FRAGMENT EQUALS 1 AND PROCESSING");
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mWorkFormFragment);
+                transaction.commit();
+            }
+        }else{
+            Log.d(TAG, "onCreate: WORK FRAGMENT IS NULL");
+        }
+
+        /**
+         * Home Fragment If conditions
          * */
         if(showHomeFragment != null){
             if(showHomeFragment.equals("1")){
-                Log.d(TAG, "onCreate: HOMEFRAGMENT EQUALS 1 AND PROCESSING");
+                Log.d(TAG, "onCreate: HOME FRAGMENT EQUALS 1 AND PROCESSING");
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.registerContent, mHomeFormFragment);
                 transaction.commit();
@@ -117,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
         /**
-         * If condition for HOME FRAGMENT
+         * If condition for PASSWORD FRAGMENT
          * */
         if(showPasswordFragment != null) {
             if (showPasswordFragment.equals("1")) {

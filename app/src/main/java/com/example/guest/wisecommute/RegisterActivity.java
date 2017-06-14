@@ -28,11 +28,10 @@ import butterknife.ButterKnife;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, Firebase {
     private static final String TAG = RegisterActivity.class.getSimpleName();
-    @Bind(R.id.btnRegister) Button btnRegister;
-    @Bind(R.id.btnLogIn) Button btnLogIn;
-    @Bind(R.id.etEmail) EditText etEmail;
-    @Bind(R.id.etPassword) EditText etPassword;
-    @Bind(R.id.etPasswordConfirm) EditText etPasswordConfirm;
+//    @Bind(R.id.btnRegister) Button btnRegister;
+//    @Bind(R.id.etEmail) EditText etEmail;
+//    @Bind(R.id.etPassword) EditText etPassword;
+//    @Bind(R.id.etPasswordConfirm) EditText etPasswordConfirm;
 
     private DatabaseReference userAccounts;
 
@@ -61,14 +60,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 .getReference()
                 .child("users");
 
-        TextView[] textViews = {etEmail, etPassword, etPasswordConfirm};
+//        TextView[] textViews = {etEmail, etPassword}; //removed passwordConfim
 
-        for(TextView textView : textViews) {
-            // set text view font
-        }
+//        for(TextView textView : textViews) {
+//            // set text view font
+//        }
 
-        btnLogIn.setOnClickListener(this);
-        btnRegister.setOnClickListener(this);
+//        btnRegister.setOnClickListener(this);
 
         Log.d(TAG, "onCreate: ends");
     }
@@ -96,21 +94,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(v == btnRegister) {
-            Log.d(TAG, "onClick: btnRegister");
-            createNewUser();
-        } else if (v == btnLogIn) {
-            Intent intent = new Intent(RegisterActivity.this, LogInActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        }
+//    '
     }
 
     private void createNewUser() {
-        final String email = etEmail.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-        String password2 = etPasswordConfirm.getText().toString().trim();
+        final String email = "placerhiolder"; //etEmail.getText().toString().trim();
+        String password = "placeholder"; //etPassword.getText().toString().trim();
+        String password2 = "placeholder"; //etPasswordConfirm.getText().toString().trim();
 
         if(!email.equals("") && !password.equals("") && !password2.equals("")) {
             if (password.equals(password2)) {

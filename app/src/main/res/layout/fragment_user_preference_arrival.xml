@@ -15,7 +15,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
+
         android:layout_marginStart="105dp" />
+
 
     <TextView
         android:id="@+id/tvTimerText"

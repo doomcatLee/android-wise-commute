@@ -27,7 +27,7 @@ import static com.example.guest.wisecommute.StopListActivity.TAG;
 
 public class TrimetService {
 
-    public static void findArrivals(String trainColor, String trainStopID, String trainDirection, String trainShortSign, Callback callback) {
+    public static void findArrivals(String trainColor, String trainStopID, String trainDirection, Callback callback) {
 
         // Set up our credentials
         OkHttpClient client = new OkHttpClient.Builder()

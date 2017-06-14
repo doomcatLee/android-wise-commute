@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.guest.wisecommute.UserPreferenceArrivalFragment">
+    tools:context="com.example.guest.wisecommute.fragments.UserPreferenceArrivalFragment">
 
     <TextView
         android:id="@+id/tvCircle"

@@ -1,4 +1,4 @@
-package com.example.guest.wisecommute;
+package com.example.guest.wisecommute.fragments;
 
 
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.guest.wisecommute.R;
 import com.example.guest.wisecommute.adapters.TwitterAdapter;
 import com.example.guest.wisecommute.models.Tweet;
 import com.example.guest.wisecommute.services.TwitterService;

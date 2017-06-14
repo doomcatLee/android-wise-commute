@@ -27,7 +27,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, Firebase {
+
     private static final String TAG = RegisterActivity.class.getSimpleName();
+
+
 //    @Bind(R.id.btnRegister) Button btnRegister;
 //    @Bind(R.id.etEmail) EditText etEmail;
 //    @Bind(R.id.etPassword) EditText etPassword;

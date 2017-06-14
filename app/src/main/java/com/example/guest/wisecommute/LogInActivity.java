@@ -11,14 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.guest.wisecommute.interfaces.SearchForMatch;
+import com.example.guest.wisecommute.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -54,6 +60,14 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_log_in);
         ButterKnife.bind(this);
 
+        /** Assigning the Firebase Reference, basically we are telling Firebase where are
+         * starting point should be inside our database. For this use case, we want the
+         * userAccount variable to hold the reference to the users section of our database. */
+        userAccounts = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("users");
+
         createAuthProgressDialog();
 
         mAuth = FirebaseAuth.getInstance();
@@ -62,6 +76,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null) {
+                    /** Get the users preferences and save in shared preferences */
+
                     Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -69,14 +85,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         };
-
-        /** Assigning the Firebase Reference, basically we are telling Firebase where are
-         * starting point should be inside our database. For this use case, we want the
-         * userAccount variable to hold the reference to the users section of our database. */
-        userAccounts = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child("users");
 
         btnLogIn.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
@@ -175,37 +183,37 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 //        }
 //    }
 
-//    private void getUsersFromFirebase(DatabaseReference reference, final SearchForMatch callback) {
-//
-//         searchedUsersReferenceListener = reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Log.d(TAG, "onDataChange: starts");
-//                ArrayList<User> users = new ArrayList<>();
-//                for(DataSnapshot userSnapShot : dataSnapshot.getChildren()) {
-//                    /** How to pull out individual fields */
-////                    String firstName = (String) userSnapShot.child("firstName").getValue();
-////                    String lastName = (String) userSnapShot.child("lastName").getValue();
-////                    String email = (String) userSnapShot.child("email").getValue();
-////                    String phoneNumber = (String) userSnapShot.child("phoneNumber").getValue();
-////                    User user = new User(firstName, lastName, email, phoneNumber);
-////                    Log.d(TAG, "onDataChange: user is " + user);
-//
-//                    /** Pulling out the entire object */
-//                    User user = userSnapShot.getValue(User.class);
-//
-//                    /** Adding to users ArrayList */
-//                    users.add(user);
-//                }
-//
-//                Log.d(TAG, "onDataChange: ends");
-//                callback.searchForMatch(users);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.e(TAG, "onCancelled: Firebase read failed " + databaseError.getMessage());
-//            }
-//        });
-//    }
+    private void getUsersFromFirebase(DatabaseReference reference, final SearchForMatch callback) {
+
+         searchedUsersReferenceListener = reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: starts");
+                ArrayList<User> users = new ArrayList<>();
+                for(DataSnapshot userSnapShot : dataSnapshot.getChildren()) {
+                    /** How to pull out individual fields */
+//                    String firstName = (String) userSnapShot.child("firstName").getValue();
+//                    String lastName = (String) userSnapShot.child("lastName").getValue();
+//                    String email = (String) userSnapShot.child("email").getValue();
+//                    String phoneNumber = (String) userSnapShot.child("phoneNumber").getValue();
+//                    User user = new User(firstName, lastName, email, phoneNumber);
+//                    Log.d(TAG, "onDataChange: user is " + user);
+
+                    /** Pulling out the entire object */
+                    User user = userSnapShot.getValue(User.class);
+
+                    /** Adding to users ArrayList */
+                    users.add(user);
+                }
+
+                Log.d(TAG, "onDataChange: ends");
+                callback.searchForMatch(users);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: Firebase read failed " + databaseError.getMessage());
+            }
+        });
+    }
 }

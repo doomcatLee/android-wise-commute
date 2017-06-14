@@ -55,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     String showPasswordFragment = "0";
     String showHomeFragment = "0";
     String showWorkFragment = "0";
+    String isFormDone = "0";
 
     private TextView mNextButton1;
 
@@ -94,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         showPasswordFragment = i.getStringExtra("showPasswordFragment");
         showHomeFragment = i.getStringExtra("showHomeFragment");
         showWorkFragment = i.getStringExtra("showWorkFragment");
+        isFormDone = i.getStringExtra("isFormDone");
         Log.d(TAG, "onCreate: SHOW WORK" + showWorkFragment);
 
         /**
@@ -102,6 +104,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.registerContent, mEmailFormFragment);
         transaction.commit();
+
+        /**
+         * When the form is complete, trigger this condition
+         * */
+        if(isFormDone != null){
+            if(isFormDone.equals("1")){
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+            }else{
+                Log.d(TAG, "onCreate: WORK FRAGMENT IS NULL");
+            }
+        }
 
         /**
          * Work Fragment if condition

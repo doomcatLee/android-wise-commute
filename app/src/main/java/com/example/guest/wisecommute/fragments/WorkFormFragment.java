@@ -35,7 +35,7 @@ public class WorkFormFragment extends Fragment {
             public void onClick(View v) {
                 if (v == mNextButton) {
                     Intent intent = new Intent(getActivity(), RegisterActivity.class);
-                    intent.putExtra("showWorkFragment", "1");
+                    intent.putExtra("isFormDone", "1");
                     startActivity(intent);
                 }
             }

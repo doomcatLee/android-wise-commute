@@ -35,7 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
         } else if (id == R.id.action_settings) {
 
         } else if (id == R.id.action_dashboard) {
-            Intent intent = new Intent(SettingsActivity.this, DashboardActivity.class);
+            Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }

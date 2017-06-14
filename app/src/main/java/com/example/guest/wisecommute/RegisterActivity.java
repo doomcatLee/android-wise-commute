@@ -10,13 +10,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guest.wisecommute.fragments.EmailFormFragment;
 
+import com.example.guest.wisecommute.fragments.PasswordFormFragment;
 import com.example.guest.wisecommute.interfaces.Firebase;
 import com.example.guest.wisecommute.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,7 +26,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, Firebase {
@@ -38,6 +36,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private FragmentTransaction transaction;
     private FragmentManager fragmentManager;
     private EmailFormFragment mEmailFormFragment;
+    private PasswordFormFragment mPasswordFormFragment;
+
+    private TextView mNextButton1;
 
 
 
@@ -63,14 +64,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: starts");
 
+
         mEmailFormFragment = new EmailFormFragment();
+
 
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.registerContent, mEmailFormFragment);
         transaction.commit();
 
-
+        mNextButton1 = (TextView) findViewById(R.id.btnNext2);
         mAuth = FirebaseAuth.getInstance();
         createAuthStateListener();
         createAuthProgressDialog();
@@ -94,10 +97,27 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Log.d(TAG, "onCreate: ends");
     }
 
+    public void showPasswordFragment(boolean fragment) {
+        if(fragment) {
+            transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.registerContent, mPasswordFormFragment);
+            transaction.commit();
+        }
+    }
+
+
     @Override
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+        Intent i = getIntent();
+        String showPasswordFragment = i.getStringExtra("showPasswordFragment");
+        if(showPasswordFragment != null){
+            if (showPasswordFragment.equals("1")){
+                showPasswordFragment(true);
+            }
+
+        }
     }
 
     @Override
@@ -117,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-//    '
+
     }
 
     private void createNewUser() {

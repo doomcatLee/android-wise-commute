@@ -74,7 +74,9 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
             startActivity(intent);
             finish();
         } else if (id == R.id.action_dashboard) {
-            showDashboardFragment(true);
+            Intent intent = new Intent(TrainColorActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.guest.wisecommute.fragments.EmailFormFragment;
 
 import com.example.guest.wisecommute.interfaces.Firebase;
 import com.example.guest.wisecommute.models.User;
@@ -30,6 +34,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
 
+    //FRAGMENT STUFF
+    private FragmentTransaction transaction;
+    private FragmentManager fragmentManager;
+    private EmailFormFragment mEmailFormFragment;
+
+
 
 //    @Bind(R.id.btnRegister) Button btnRegister;
 //    @Bind(R.id.etEmail) EditText etEmail;
@@ -46,10 +56,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: starts");
+
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: starts");
+
+        mEmailFormFragment = new EmailFormFragment();
+
+        fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.registerContent, mEmailFormFragment);
+        transaction.commit();
+
 
         mAuth = FirebaseAuth.getInstance();
         createAuthStateListener();

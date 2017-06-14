@@ -39,8 +39,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private PasswordFormFragment mPasswordFormFragment;
 
     private TextView mNextButton1;
-
-
+    String showPasswordFragment = "0";
 
 //    @Bind(R.id.btnRegister) Button btnRegister;
 //    @Bind(R.id.etEmail) EditText etEmail;
@@ -57,21 +56,57 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-
-        super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: starts");
 
 
         mEmailFormFragment = new EmailFormFragment();
-
-
+        mPasswordFormFragment = new PasswordFormFragment();
         fragmentManager = getSupportFragmentManager();
-        transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.registerContent, mEmailFormFragment);
-        transaction.commit();
+
+        Intent i = getIntent();
+        showPasswordFragment = i.getStringExtra("showPasswordFragment");
+        if(showPasswordFragment != null) {
+            if (showPasswordFragment.equals("1")) {
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mPasswordFormFragment);
+                transaction.commit();
+            } else {
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mEmailFormFragment);
+                transaction.commit();
+            }
+        }else{
+            transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.registerContent, mEmailFormFragment);
+            transaction.commit();
+        }
+
+//        Intent intent = getIntent();
+//        String showPasswordFragment = intent.getStringExtra("showPasswordFragment");
+
+//        transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.registerContent, mEmailFormFragment);
+//        transaction.commit();
+
+//            //THIS MAY CAUSE ERROR LATER ON
+//            if(showPasswordFragment != null) {
+//                if(showPasswordFragment.equals("0")){
+//                    transaction = fragmentManager.beginTransaction();
+//                    transaction.replace(R.id.registerContent, mEmailFormFragment);
+//                    transaction.commit();
+//                } else if(showPasswordFragment.equals("1")){
+//                    transaction = fragmentManager.beginTransaction();
+//                    transaction.replace(R.id.registerContent, mPasswordFormFragment);
+//                    transaction.commit();
+//                }
+//            } else {
+//                transaction = fragmentManager.beginTransaction();
+//                transaction.replace(R.id.registerContent, mEmailFormFragment);
+//                transaction.commit();
+//            }
 
         mNextButton1 = (TextView) findViewById(R.id.btnNext2);
         mAuth = FirebaseAuth.getInstance();
@@ -86,46 +121,27 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 .getReference()
                 .child("users");
 
-//        TextView[] textViews = {etEmail, etPassword}; //removed passwordConfim
-
-//        for(TextView textView : textViews) {
-//            // set text view font
-//        }
-
-//        btnRegister.setOnClickListener(this);
-
         Log.d(TAG, "onCreate: ends");
     }
 
-    public void showPasswordFragment(boolean fragment) {
-        if(fragment) {
-            transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.registerContent, mPasswordFormFragment);
-            transaction.commit();
-        }
-    }
 
 
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: starts");
         mAuth.addAuthStateListener(mAuthListener);
-        Intent i = getIntent();
-        String showPasswordFragment = i.getStringExtra("showPasswordFragment");
-        if(showPasswordFragment != null){
-            if (showPasswordFragment.equals("1")){
-                showPasswordFragment(true);
-            }
-
-        }
+        Log.d(TAG, "onStart: ends");
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Log.d(TAG, "onStop: starts");
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+        Log.d(TAG, "onStop: ends");
     }
 
     private void createAuthProgressDialog() {

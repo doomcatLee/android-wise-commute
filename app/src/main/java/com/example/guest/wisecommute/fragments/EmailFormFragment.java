@@ -32,6 +32,7 @@ public class EmailFormFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: starts");
         ButterKnife.bind(getActivity());
         View view = inflater.inflate(R.layout.fragment_email_form, container, false);
         mNextButton1 = (TextView) view.findViewById(R.id.btnNext2);
@@ -41,15 +42,14 @@ public class EmailFormFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 if (v == mNextButton1) {
-                    Log.d("FUCK","clicked");
                     Intent intent = new Intent(getActivity(), RegisterActivity.class);
                     intent.putExtra("showPasswordFragment", "1");
                     startActivity(intent);
                 }
             }
         });
+        Log.d(TAG, "onCreateView: ends");
         return view;
-
     }
 
 

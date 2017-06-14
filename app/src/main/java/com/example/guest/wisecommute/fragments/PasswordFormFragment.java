@@ -35,6 +35,17 @@ public class PasswordFormFragment extends Fragment {
         ButterKnife.bind(getActivity());
         View view = inflater.inflate(R.layout.fragment_password_form, container, false);
         mNextButton = (TextView) view.findViewById(R.id.btnNext2);
+        mBackButton = (ImageView) view.findViewById(R.id.btnBack);
+
+        mBackButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                intent.putExtra("passwordBackClicked", "1");
+                startActivity(intent);
+            }
+        });
+
 
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +57,8 @@ public class PasswordFormFragment extends Fragment {
                 }
             }
         });
+
         return view;
+
     }
 }

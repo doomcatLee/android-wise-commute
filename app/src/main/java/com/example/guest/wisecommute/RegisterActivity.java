@@ -57,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     String showHomeFragment = "0";
     String showWorkFragment = "0";
     String isFormDone = "0";
+    String passwordBackClicked = "0";
 
     private TextView mNextButton1;
 
@@ -97,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         showHomeFragment = i.getStringExtra("showHomeFragment");
         showWorkFragment = i.getStringExtra("showWorkFragment");
         isFormDone = i.getStringExtra("isFormDone");
+        passwordBackClicked = i.getStringExtra("passwordBackClicked");
         Log.d(TAG, "onCreate: SHOW WORK" + showWorkFragment);
 
         /**
@@ -154,7 +156,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.registerContent, mPasswordFormFragment);
                 transaction.commit();
-            } else {
+            } else if (passwordBackClicked.equals("1")){
+                Log.d(TAG, "onCreate: PASSWORD BACK HAS BEEN CLICKED");
+            }else{
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.registerContent, mEmailFormFragment);
                 transaction.commit();

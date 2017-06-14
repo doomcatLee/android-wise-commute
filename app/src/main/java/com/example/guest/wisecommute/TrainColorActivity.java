@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 
+import com.example.guest.wisecommute.fragments.DashboardFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.Bind;

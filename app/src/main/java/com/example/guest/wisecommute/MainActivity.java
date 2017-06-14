@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.guest.wisecommute.fragments.DashboardFragment;
+import com.example.guest.wisecommute.fragments.LiveFeedFragment;
+import com.example.guest.wisecommute.fragments.UserPreferenceArrivalFragment;
 import com.example.guest.wisecommute.models.Train;
 import com.example.guest.wisecommute.services.TrimetService;
 import com.google.firebase.auth.FirebaseAuth;

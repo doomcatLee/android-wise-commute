@@ -1,4 +1,4 @@
-package com.example.guest.wisecommute;
+package com.example.guest.wisecommute.fragments;
 
 
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
+
+import com.example.guest.wisecommute.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

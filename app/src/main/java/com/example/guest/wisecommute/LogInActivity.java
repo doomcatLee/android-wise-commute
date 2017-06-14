@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,8 +26,8 @@ import butterknife.ButterKnife;
 
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = LogInActivity.class.getSimpleName();
-    @Bind(R.id.btnLogIn) Button btnLogIn;
-    @Bind(R.id.btnRegister) Button btnRegister;
+    @Bind(R.id.btnLogin) Button btnLogIn;
+    @Bind(R.id.btnRegister) TextView btnRegister;
     @Bind(R.id.etEmail) EditText etEmail;
     @Bind(R.id.etPassword) EditText etPassword;
 

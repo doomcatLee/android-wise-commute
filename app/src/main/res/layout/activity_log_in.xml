@@ -11,39 +11,67 @@
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="165dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/etPassword"
+        android:layout_marginStart="67dp"
+        android:layout_marginEnd="67dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="26dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="67dp"
+        android:layout_marginRight="67dp" />
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="234dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        android:layout_marginStart="67dp"
+        android:layout_marginEnd="67dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="41dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="67dp"
+        android:layout_marginRight="67dp" />
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:text="Login"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="318dp" />
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/etPassword"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="145dp"
+        app:layout_constraintLeft_toLeftOf="@+id/etPassword" />
 
     <TextView
         android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don't have an account? Register"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="388dp" />
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/btnLogin"
+        android:layout_marginLeft="26dp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -52,6 +80,11 @@
         android:text="Wise Commute"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="54dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="54dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

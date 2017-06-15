@@ -104,7 +104,10 @@ public class TrainArrivalActivity extends AppCompatActivity implements View.OnCl
             startActivity(intent);
             finish();
         } else if (id == R.id.action_dashboard) {
-            showDashboardFragment(true);
+            Intent intent = new Intent(TrainArrivalActivity.this, MainActivity.class);
+            intent.putExtra("showDashboardFragment", "true");
+            startActivity(intent);
+            finish();
         } else if (id == R.id.action_refresh) {
             Log.d(TAG, "onOptionsItemSelected: clicked");
             // trigger api call

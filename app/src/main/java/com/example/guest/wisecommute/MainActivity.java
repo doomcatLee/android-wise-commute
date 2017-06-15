@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
         userPreferenceArrivalFragment = new UserPreferenceArrivalFragment();
         liveFeedFragment = new LiveFeedFragment();
         dashboardFragment = new DashboardFragment();
-
         fragmentManager = getSupportFragmentManager();
+
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.content, userPreferenceArrivalFragment);
         transaction.commit();
@@ -82,6 +82,23 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        String showDashboard = (String) intent.getStringExtra("showDashboardFragment");
+        Log.d(TAG, "onCreate: showDashboard variable is " + showDashboard);
+        if(showDashboard != null) {
+            if (showDashboard.equals("true")) {
+                fragmentManager = getSupportFragmentManager();
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content, dashboardFragment);
+                transaction.commit();
+                showDashboard = "false";
+            }
+        }
     }
 
     /** Menu Code */
@@ -110,10 +127,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDashboardFragment(boolean showDashboardFragment) {
-        if(showDashboardFragment) {
+        Intent intent = getIntent();
+        String showDashboard = intent.getStringExtra("showDashboardFragment");
+
+        if(showDashboardFragment || showDashboard.equals("true")) {
             transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.content, dashboardFragment);
             transaction.commit();
+            showDashboard = "false";
         }
     }
 

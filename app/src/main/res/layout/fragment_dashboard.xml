@@ -11,11 +11,11 @@
         android:id="@+id/btnSave"
         android:layout_width="305dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="24dp"
         android:text="Save"
-        app:layout_constraintLeft_toLeftOf="@+id/sWork"
-        app:layout_constraintTop_toBottomOf="@+id/sWork" />
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/sHome"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/sHome" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -55,21 +55,22 @@
         app:layout_constraintLeft_toLeftOf="@+id/sDirection"
         app:layout_constraintTop_toBottomOf="@+id/sDirection" />
 
-    <Spinner
-        android:id="@+id/sWork"
-        android:layout_width="305dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintLeft_toLeftOf="@+id/sHome"
-        app:layout_constraintTop_toBottomOf="@+id/sHome" />
-
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvSeekBarValue"
+        app:layout_constraintLeft_toRightOf="@+id/tvSeekBarValue"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:id="@+id/tvSeekBarValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:text="Home"
+        android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvTitle"
         app:layout_constraintLeft_toRightOf="@+id/tvTitle" />
 

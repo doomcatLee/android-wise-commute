@@ -62,6 +62,7 @@ public class TwitterService {
                 for(int i = 0; i <= twitterJSON.length(); i++) {
                     JSONObject tweetJSON = twitterJSON.getJSONObject(i);
 
+//                    String nastyStamp = tweetJSON.getString("created_at");
                     String timeStamp = timeFilter(tweetJSON.getString("created_at"));
                     String text = tweetJSON.getString("text");
                     String name = tweetJSON.getJSONObject("user").getString("name");
@@ -69,8 +70,9 @@ public class TwitterService {
                     String location = tweetJSON.getJSONObject("user").getString("location");
 
                     Tweet tweet = new Tweet(timeStamp, text, name, screenName, location);
-                    Log.d(TAG, "TIMEstamp = " +timeStamp);
+                    Log.d(TAG, "TIMEstamp = " + timeStamp);
                     tweets.add(tweet);
+//                    Log.d(TAG, "processResults: " + nastyStamp);
                 }
             } else {
                 Log.d(TAG, "processResults: Response not successful!");
@@ -98,5 +100,8 @@ public class TwitterService {
         return output;
     }
 
+    public String dateFilter(String d){
+        return d.substring(4,10);
+    }
 
 }

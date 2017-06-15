@@ -26,6 +26,7 @@ public class GunLeeTest {
         String min = response.substring(14, 16);
         assertEquals("15", hour);
         assertEquals("01", min);
+        assertEquals("Jun 13", response.substring(4,10));
 
         final String time = "14:01";
 

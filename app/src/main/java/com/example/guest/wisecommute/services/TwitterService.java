@@ -64,12 +64,13 @@ public class TwitterService {
 
 //                    String nastyStamp = tweetJSON.getString("created_at");
                     String timeStamp = timeFilter(tweetJSON.getString("created_at"));
+                    String day = dateFilter(tweetJSON.getString("created_at"));
                     String text = tweetJSON.getString("text");
                     String name = tweetJSON.getJSONObject("user").getString("name");
                     String screenName = tweetJSON.getJSONObject("user").getString("screen_name");
                     String location = tweetJSON.getJSONObject("user").getString("location");
 
-                    Tweet tweet = new Tweet(timeStamp, text, name, screenName, location);
+                    Tweet tweet = new Tweet(timeStamp, day, text, name, screenName, location);
                     Log.d(TAG, "TIMEstamp = " + timeStamp);
                     tweets.add(tweet);
 //                    Log.d(TAG, "processResults: " + nastyStamp);

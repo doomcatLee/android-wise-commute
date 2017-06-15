@@ -2,13 +2,16 @@ package com.example.guest.wisecommute.models;
 
 public class Tweet {
     private String timeStamp;
+
+    private String day;
     private String text;
     private String username;
     private String screenName;
     private String location;
 
-    public Tweet(String timeStamp, String text, String username, String screenName, String location) {
+    public Tweet(String timeStamp, String day, String text, String username, String screenName, String location) {
         this.timeStamp = timeStamp;
+        this.day = day;
         this.text = text;
         this.username = username;
         this.screenName = screenName;
@@ -34,6 +37,15 @@ public class Tweet {
     public String getLocation() {
         return location;
     }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
 
     @Override
     public String toString() {

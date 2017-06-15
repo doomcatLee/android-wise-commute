@@ -10,7 +10,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -59,13 +62,14 @@ public class TwitterService {
                 for(int i = 0; i <= twitterJSON.length(); i++) {
                     JSONObject tweetJSON = twitterJSON.getJSONObject(i);
 
-                    String timeStamp = tweetJSON.getString("created_at");
+                    String timeStamp = timeFilter(tweetJSON.getString("created_at"));
                     String text = tweetJSON.getString("text");
                     String name = tweetJSON.getJSONObject("user").getString("name");
                     String screenName = tweetJSON.getJSONObject("user").getString("screen_name");
                     String location = tweetJSON.getJSONObject("user").getString("location");
 
                     Tweet tweet = new Tweet(timeStamp, text, name, screenName, location);
+                    Log.d(TAG, "TIMEstamp = " +timeStamp);
                     tweets.add(tweet);
                 }
             } else {
@@ -79,4 +83,20 @@ public class TwitterService {
         }
         return tweets;
     }
+
+    public String timeFilter(String t){
+        String output="";
+        String hour = t.substring(11, 13);
+        String min = t.substring(14, 16);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
+            Date dateObj = sdf.parse(hour + ":" + min);
+            output = new SimpleDateFormat("h:mm a").format(dateObj);
+        } catch (final ParseException e) {
+            e.printStackTrace();
+        }
+        return output;
+    }
+
+
 }

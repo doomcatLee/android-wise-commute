@@ -3,6 +3,9 @@ package com.example.guest.wisecommute;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -10,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.guest.wisecommute.adapters.StopAdapter;
 import com.example.guest.wisecommute.models.Stop;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -23,11 +27,15 @@ public class StopListActivity extends AppCompatActivity {
     @Bind(R.id.tvTrainDirectionFullSign) TextView tvTrainDirectionFullSign;
     ArrayList<Stop> stopList = new ArrayList<>();
 
+    MainActivity mainActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stop_list);
         ButterKnife.bind(this);
+
+        mainActivity = new MainActivity();
 
         Intent intent = getIntent();
         final String trainColor = intent.getStringExtra("trainColor");
@@ -36,25 +44,25 @@ public class StopListActivity extends AppCompatActivity {
         final String trainShortSign = intent.getStringExtra("trainShortSign");
 
         if (trainColor.equals("green") && trainDirection.equals("clackamas")) {
-            setStopList(Constants.greenToClackamasStops);
+            setStopList(StopConstants.greenToClackamasStops);
         } else if (trainColor.equals("green") && trainDirection.equals("city center")) {
-            setStopList(Constants.greenToCityCenterStops);
+            setStopList(StopConstants.greenToCityCenterStops);
         } else if (trainColor.equals("blue") && trainDirection.equals("hillsboro")) {
-            setStopList(Constants.blueToHillsboroStops);
+            setStopList(StopConstants.blueToHillsboroStops);
         } else if (trainColor.equals("blue") && trainDirection.equals("gresham")) {
-            setStopList(Constants.blueToGreshamStops);
+            setStopList(StopConstants.blueToGreshamStops);
         } else if (trainColor.equals("red") && trainDirection.equals("airport")) {
-            setStopList(Constants.redToAirportStops);
+            setStopList(StopConstants.redToAirportStops);
         } else if (trainColor.equals("red") && trainDirection.equals("beaverton")) {
-            setStopList(Constants.redToBeavertonStops);
+            setStopList(StopConstants.redToBeavertonStops);
         } else if (trainColor.equals("orange") && trainDirection.equals("milwaukie")) {
-            setStopList(Constants.orangeToMilwaukieStops);
+            setStopList(StopConstants.orangeToMilwaukieStops);
         } else if (trainColor.equals("orange") && trainDirection.equals("city center")) {
-            setStopList(Constants.orangeToCityCenterStops);
+            setStopList(StopConstants.orangeToCityCenterStops);
         } else if (trainColor.equals("yellow") && trainDirection.equals("expo")) {
-            setStopList(Constants.yellowToExpoStops);
+            setStopList(StopConstants.yellowToExpoStops);
         } else if (trainColor.equals("yellow") && trainDirection.equals("city center")) {
-            setStopList(Constants.yellowToCityCenterStops);
+            setStopList(StopConstants.yellowToCityCenterStops);
         }
 
         tvTrainDirectionFullSign.setText(trainDirectionFullSign);
@@ -79,6 +87,40 @@ public class StopListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    /** Menu Code */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /** Menu Code */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        } else if (id == R.id.action_settings) {
+            Intent intent = new Intent(StopListActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.action_dashboard) {
+            mainActivity.showDashboardFragment(true);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /** Logout Firebase User */
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(StopListActivity.this, LogInActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public void setStopList(Stop[] stops) {

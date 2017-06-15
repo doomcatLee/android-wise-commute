@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "320087438056",
+    "firebase_url": "https://trimet-d6e12.firebaseio.com",
+    "project_id": "trimet-d6e12",
+    "storage_bucket": "trimet-d6e12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320087438056:android:f34c46c456a4ee83",
+        "android_client_info": {
+          "package_name": "com.example.guest.wisecommute"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320087438056-uh18625bjau55vt5ftsudfqkn1sisl26.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.guest.wisecommute",
+            "certificate_hash": "1ff1e23950fa17b3547d16483f164feae33fddcc"
+          }
+        },
+        {
+          "client_id": "320087438056-m25i7rduf9f93467rf7830kffv5pah4o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4cjb0OrHjU7gGc5lwptumdgAQRo9CYcc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320087438056-m25i7rduf9f93467rf7830kffv5pah4o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

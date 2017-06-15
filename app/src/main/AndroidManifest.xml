@@ -3,6 +3,7 @@
     package="com.example.guest.wisecommute">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -11,8 +12,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".LogInActivity"
+            android:theme="@style/NoActionBarTheme">
+
+
+        </activity>
+        <activity android:name=".TrainColorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.TrainColorActivity" />
+        </activity>
+        <activity android:name=".RegisterActivity"
+            android:theme="@style/NoActionBarTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.RegisterActivity" />
+        </activity>
+        <activity android:name=".StopListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.StopListActivity" />
+        </activity>
+        <activity android:name=".TrainArrivalActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.TrainArrivalActivity" />
+        </activity>
+        <activity android:name=".SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.wisecommute.SettingsActivity" />
+        </activity>
         <activity
             android:name=".MainActivity"
+            android:label="@string/title_activity_main" />
+        <activity android:name=".IntroActivity"
             android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,10 +54,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TrainColorActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".StopListActivity" />
-        <activity android:name=".TrainArrivalActivity"></activity>
     </application>
 
 </manifest>

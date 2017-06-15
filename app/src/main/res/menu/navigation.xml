@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_to_from"
+        android:icon="@drawable/ic_compare_arrows_black_24dp"
+        android:title="To/From" />
+
+    <item
+        android:id="@+id/navigation_all"
+        android:icon="@drawable/ic_directions_black_24dp"
+        android:title="All" />
+
+    <item
+        android:id="@+id/navigation_live_feed"
+        android:icon="@drawable/ic_rss_feed_black_24dp"
+        android:title="Live Feed" />
+
+</menu>

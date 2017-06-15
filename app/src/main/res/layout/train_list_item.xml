@@ -44,4 +44,5 @@
         android:text="Scheduled: 9:45 pm"
         app:layout_constraintLeft_toLeftOf="@+id/tvEstimated"
         app:layout_constraintTop_toBottomOf="@+id/tvEstimated" />
+
 </android.support.constraint.ConstraintLayout>

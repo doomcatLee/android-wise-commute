@@ -39,12 +39,15 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private DashboardFragment dashboardFragment;
+    private MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train_color);
         ButterKnife.bind(this);
+
+        mainActivity = new MainActivity();
 
         dashboardFragment = new DashboardFragment();
         fragmentManager = getSupportFragmentManager();
@@ -76,18 +79,11 @@ public class TrainColorActivity extends AppCompatActivity implements View.OnClic
             finish();
         } else if (id == R.id.action_dashboard) {
             Intent intent = new Intent(TrainColorActivity.this, MainActivity.class);
+            intent.putExtra("showDashboardFragment", "true");
             startActivity(intent);
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void showDashboardFragment(boolean showDashboardFragment) {
-        if(showDashboardFragment) {
-            transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.content, dashboardFragment);
-            transaction.commit();
-        }
     }
 
     /** Logout Firebase User */

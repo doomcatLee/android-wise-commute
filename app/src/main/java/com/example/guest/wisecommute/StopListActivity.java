@@ -27,15 +27,11 @@ public class StopListActivity extends AppCompatActivity {
     @Bind(R.id.tvTrainDirectionFullSign) TextView tvTrainDirectionFullSign;
     ArrayList<Stop> stopList = new ArrayList<>();
 
-    MainActivity mainActivity;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stop_list);
         ButterKnife.bind(this);
-
-        mainActivity = new MainActivity();
 
         Intent intent = getIntent();
         final String trainColor = intent.getStringExtra("trainColor");
@@ -109,7 +105,10 @@ public class StopListActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else if (id == R.id.action_dashboard) {
-            mainActivity.showDashboardFragment(true);
+            Intent intent = new Intent(StopListActivity.this, MainActivity.class);
+            intent.putExtra("showDashboardFragment", "true");
+            startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

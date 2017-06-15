@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private HomeFormFragment mHomeFormFragment;
     private WorkFormFragment mWorkFormFragment;
 
+
     /**
      * Initialize Fragment trigger
      * 0 = false, 1 = true
@@ -56,6 +57,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     String showHomeFragment = "0";
     String showWorkFragment = "0";
     String isFormDone = "0";
+    String passwordBackClicked = "0";
+    String homeBackClicked = "0";
+    String workBackClicked = "0";
 
     private TextView mNextButton1;
 
@@ -96,6 +100,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         showHomeFragment = i.getStringExtra("showHomeFragment");
         showWorkFragment = i.getStringExtra("showWorkFragment");
         isFormDone = i.getStringExtra("isFormDone");
+        passwordBackClicked = i.getStringExtra("passwordBackClicked");
+        homeBackClicked = i.getStringExtra("homeBackClicked");
+        workBackClicked = i.getStringExtra("workBackClicked");
+
         Log.d(TAG, "onCreate: SHOW WORK" + showWorkFragment);
 
         /**
@@ -118,6 +126,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
         /**
+         * Home Backbutton If conditions
+         * */
+        if(workBackClicked != null){
+            if(workBackClicked.equals("1")){
+                Log.d(TAG, "onCreate: WORK BACK BUTTON CLICKED");
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mHomeFormFragment);
+                transaction.commit();
+            }
+        }
+        /**
          * Work Fragment if condition
          * */
         if(showWorkFragment != null){
@@ -131,6 +150,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Log.d(TAG, "onCreate: WORK FRAGMENT IS NULL");
         }
 
+
+        /**
+         * Home Backbutton If conditions
+         * */
+        if(homeBackClicked != null){
+            if(homeBackClicked.equals("1")){
+                Log.d(TAG, "onCreate: HOME BACK BUTTON CLICKED");
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mPasswordFormFragment);
+                transaction.commit();
+            }
+        }
         /**
          * Home Fragment If conditions
          * */
@@ -153,7 +184,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.registerContent, mPasswordFormFragment);
                 transaction.commit();
-            } else {
+            } else if (passwordBackClicked.equals("1")){
+                Log.d(TAG, "onCreate: PASSWORD BACK HAS BEEN CLICKED");
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mEmailFormFragment);
+                transaction.commit();
+            }else{
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.registerContent, mEmailFormFragment);
                 transaction.commit();

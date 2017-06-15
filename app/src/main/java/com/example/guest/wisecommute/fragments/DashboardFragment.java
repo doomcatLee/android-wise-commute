@@ -1,4 +1,4 @@
-package com.example.guest.wisecommute;
+package com.example.guest.wisecommute.fragments;
 
 
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guest.wisecommute.R;
+import com.example.guest.wisecommute.StopConstants;
 import com.example.guest.wisecommute.models.Stop;
 
 import java.util.ArrayList;

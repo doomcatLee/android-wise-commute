@@ -1,18 +1,26 @@
 package com.example.guest.wisecommute;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.guest.wisecommute.fragments.EmailFormFragment;
+
+import com.example.guest.wisecommute.fragments.HomeFormFragment;
+import com.example.guest.wisecommute.fragments.PasswordFormFragment;
+import com.example.guest.wisecommute.fragments.WorkFormFragment;
 import com.example.guest.wisecommute.interfaces.Firebase;
 import com.example.guest.wisecommute.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,13 +31,52 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, Firebase {
+
     private static final String TAG = RegisterActivity.class.getSimpleName();
-//    @Bind(R.id.btnRegister) Button btnRegister;
+
+    /**Shared Preferences here*/
+    private SharedPreferences mSharedPref;
+    private SharedPreferences.Editor mEditor;
+
+    /**
+     * Fragment Setup
+     * */
+    private FragmentTransaction transaction;
+    private FragmentManager fragmentManager;
+
+    /**
+     * Wise Commute Fragments
+     * */
+    private EmailFormFragment mEmailFormFragment;
+    private PasswordFormFragment mPasswordFormFragment;
+    private HomeFormFragment mHomeFormFragment;
+    private WorkFormFragment mWorkFormFragment;
+
+
+    /**
+     * Initialize Fragment trigger
+     * 0 = false, 1 = true
+     * */
+    String showPasswordFragment = "0";
+    String showHomeFragment = "0";
+    String showWorkFragment = "0";
+    String isFormDone = "0";
+    String passwordBackClicked = "0";
+    String homeBackClicked = "0";
+    String workBackClicked = "0";
+
+    private TextView mNextButton1;
+
+    /** User properties go here */
+    private String userEmail;
+    private String userPassword;
+    private String userPasswordConfirm;
+
 //    @Bind(R.id.etEmail) EditText etEmail;
+//    @Bind(R.id.btnRegister) Button btnRegister;
 //    @Bind(R.id.etPassword) EditText etPassword;
 //    @Bind(R.id.etPasswordConfirm) EditText etPasswordConfirm;
 
@@ -44,10 +91,50 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: starts");
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+        Log.d(TAG, "onCreate: starts");
 
+
+        /**
+         * Instantiate form fragments
+         **/
+        fragmentManager = getSupportFragmentManager();
+        mEmailFormFragment = new EmailFormFragment();
+        mPasswordFormFragment = new PasswordFormFragment();
+        mHomeFormFragment = new HomeFormFragment();
+        mWorkFormFragment = new WorkFormFragment();
+
+        /**
+         * Grab fragment string triggers from individual intents
+         * */
+        Intent i = getIntent();
+        showPasswordFragment = i.getStringExtra("showPasswordFragment");
+        showHomeFragment = i.getStringExtra("showHomeFragment");
+        showWorkFragment = i.getStringExtra("showWorkFragment");
+        isFormDone = i.getStringExtra("isFormDone");
+        passwordBackClicked = i.getStringExtra("passwordBackClicked");
+        homeBackClicked = i.getStringExtra("homeBackClicked");
+        workBackClicked = i.getStringExtra("workBackClicked");
+
+        /** Grab user information using Shared Preferences* */
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        userEmail = mSharedPref.getString("userEmail", null);
+        userPassword = mSharedPref.getString("userPassword",null);
+        userPasswordConfirm = mSharedPref.getString("userPasswordConfirm",null);
+
+
+        Log.d(TAG, "onCreate: SHOW WORK" + showWorkFragment);
+        Log.d(TAG, "VALUES PASSED FROM INTENT" + userEmail + userPassword + userPasswordConfirm);
+
+        /**
+         * By Default, always start EmailFormFragment as the main fragment for register
+         * */
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.registerContent, mEmailFormFragment);
+        transaction.commit();
+
+        mNextButton1 = (TextView) findViewById(R.id.btnNext2);
         mAuth = FirebaseAuth.getInstance();
         createAuthStateListener();
         createAuthProgressDialog();
@@ -60,29 +147,107 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 .getReference()
                 .child("users");
 
-//        TextView[] textViews = {etEmail, etPassword}; //removed passwordConfim
+        /**
+         * When the form is complete, trigger this condition
+         * */
+        if(isFormDone != null){
+            if(isFormDone.equals("1")){
+                createNewUser();
 
-//        for(TextView textView : textViews) {
-//            // set text view font
-//        }
+            }else{
+                Log.d(TAG, "onCreate: WORK FRAGMENT IS NULL");
+            }
+        }
 
-//        btnRegister.setOnClickListener(this);
+        /**
+         * Home Backbutton If conditions
+         * */
+        if(workBackClicked != null){
+            if(workBackClicked.equals("1")){
+                Log.d(TAG, "onCreate: WORK BACK BUTTON CLICKED");
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mHomeFormFragment);
+                transaction.commit();
+            }
+        }
+        /**
+         * Work Fragment if condition
+         * */
+        if(showWorkFragment != null){
+            if(showWorkFragment.equals("1")){
+                Log.d(TAG, "onCreate: WORK FRAGMENT EQUALS 1 AND PROCESSING");
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mWorkFormFragment);
+                transaction.commit();
+            }
+        }else{
+            Log.d(TAG, "onCreate: WORK FRAGMENT IS NULL");
+        }
 
+
+        /**
+         * Home Backbutton If conditions
+         * */
+        if(homeBackClicked != null){
+            if(homeBackClicked.equals("1")){
+                Log.d(TAG, "onCreate: HOME BACK BUTTON CLICKED");
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mPasswordFormFragment);
+                transaction.commit();
+            }
+        }
+        /**
+         * Home Fragment If conditions
+         * */
+        if(showHomeFragment != null){
+            if(showHomeFragment.equals("1")){
+                Log.d(TAG, "onCreate: HOME FRAGMENT EQUALS 1 AND PROCESSING");
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mHomeFormFragment);
+                transaction.commit();
+            }
+        }else{
+            Log.d(TAG, "onCreate: HOME FRAGMENT IS NULL");
+        }
+
+        /**
+         * If condition for PASSWORD FRAGMENT
+         * */
+        if(showPasswordFragment != null) {
+            if (showPasswordFragment.equals("1")) {
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mPasswordFormFragment);
+                transaction.commit();
+            } else if (passwordBackClicked.equals("1")){
+                Log.d(TAG, "onCreate: PASSWORD BACK HAS BEEN CLICKED");
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mEmailFormFragment);
+                transaction.commit();
+            }else{
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.registerContent, mEmailFormFragment);
+                transaction.commit();
+            }
+        }
         Log.d(TAG, "onCreate: ends");
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: starts");
         mAuth.addAuthStateListener(mAuthListener);
+        Log.d(TAG, "onStart: ends");
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Log.d(TAG, "onStop: starts");
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+        Log.d(TAG, "onStop: ends");
     }
 
     private void createAuthProgressDialog() {
@@ -94,16 +259,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-//    '
+
     }
 
     private void createNewUser() {
-        final String email = "placerhiolder"; //etEmail.getText().toString().trim();
-        String password = "placeholder"; //etPassword.getText().toString().trim();
-        String password2 = "placeholder"; //etPasswordConfirm.getText().toString().trim();
+        Log.d(TAG, "createNewUser: "+ userEmail);
+        Log.d(TAG, "createNewUser: "+ userPassword);
+        String email = userEmail;
+        String password = userPassword;
+        String password2 = userPasswordConfirm;
 
-        if(!email.equals("") && !password.equals("") && !password2.equals("")) {
-            if (password.equals(password2)) {
                 mAuthProgressDialog.show();
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -126,12 +291,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             }
                         });
-            } else {
-                Toast.makeText(this, "Password's don't match", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void createAuthStateListener() {

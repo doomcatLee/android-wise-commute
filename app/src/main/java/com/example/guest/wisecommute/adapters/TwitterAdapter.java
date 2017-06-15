@@ -51,8 +51,8 @@ public class TwitterAdapter extends RecyclerView.Adapter<TwitterAdapter.TwitterV
     public class TwitterViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.tvText) TextView tvText;
         @Bind(R.id.tvTimeStamp) TextView tvTimeStamp;
-        @Bind(R.id.tvScreenName) TextView tvScreenName;
-        @Bind(R.id.tvName) TextView tvName;
+        @Bind(R.id.tvDay) TextView tvDay;
+
 
         public TwitterViewHolder(View itemView) {
             super(itemView);
@@ -62,8 +62,7 @@ public class TwitterAdapter extends RecyclerView.Adapter<TwitterAdapter.TwitterV
 
         public void bindTweet(Tweet tweet) {
             tvText.setText(tweet.getText());
-            tvScreenName.setText("@" + tweet.getScreenName());
-            tvName.setText(tweet.getUsername());
+            tvDay.setText(tweet.getDay());
             tvTimeStamp.setText(tweet.getTimeStamp());
         }
     }

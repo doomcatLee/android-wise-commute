@@ -1,6 +1,9 @@
 package com.example.guest.wisecommute.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,28 +27,41 @@ import butterknife.ButterKnife;
 
 public class EmailFormFragment extends Fragment implements View.OnClickListener{
 
+    private SharedPreferences mSharedPref;
+    private SharedPreferences.Editor mEditor;
+
+
+
+
     private TextView mNextButton1;
     private ImageView mBackButton;
     private EditText mEmailEditText;
+
     private static final String TAG = EmailFormFragment.class.getSimpleName();
 
     public EmailFormFragment(){
+
 
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: starts");
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mEditor = mSharedPref.edit();
+
         ButterKnife.bind(getActivity());
         View view = inflater.inflate(R.layout.fragment_email_form, container, false);
         mNextButton1 = (TextView) view.findViewById(R.id.btnNext2);
         mBackButton = (ImageView) view.findViewById(R.id.btnBack);
+        mEmailEditText = ((EditText) view.findViewById(R.id.etEmail));
 
-        Log.d("Log the button",mNextButton1.getText().toString());
+
         mNextButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (v == mNextButton1) {
+                    addToSharedPreferences(mEmailEditText.getText().toString());
                     Intent intent = new Intent(getActivity(), RegisterActivity.class);
                     intent.putExtra("showPasswordFragment", "1");
                     startActivity(intent);
@@ -71,6 +87,10 @@ public class EmailFormFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
+    }
+
+    private void addToSharedPreferences(String email) {
+        mEditor.putString("userEmail", email).apply();
     }
 
 }

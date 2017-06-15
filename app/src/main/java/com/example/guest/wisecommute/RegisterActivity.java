@@ -1,9 +1,12 @@
 package com.example.guest.wisecommute;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -34,6 +37,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
 
+    /**Shared Preferences here*/
+    private SharedPreferences mSharedPref;
+    private SharedPreferences.Editor mEditor;
+
     /**
      * Fragment Setup
      * */
@@ -63,6 +70,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private TextView mNextButton1;
 
+    /** User properties go here */
+    private String userEmail;
+    private String userPassword;
+    private String userPasswordConfirm;
+
 //    @Bind(R.id.etEmail) EditText etEmail;
 //    @Bind(R.id.btnRegister) Button btnRegister;
 //    @Bind(R.id.etPassword) EditText etPassword;
@@ -82,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         Log.d(TAG, "onCreate: starts");
+
 
         /**
          * Instantiate form fragments
@@ -104,7 +117,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         homeBackClicked = i.getStringExtra("homeBackClicked");
         workBackClicked = i.getStringExtra("workBackClicked");
 
+        /** Grab user information using Shared Preferences* */
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        userEmail = mSharedPref.getString("userEmail", null);
+        userPassword = mSharedPref.getString("userPassword",null);
+        userPasswordConfirm = mSharedPref.getString("userPasswordConfirm",null);
+
+
         Log.d(TAG, "onCreate: SHOW WORK" + showWorkFragment);
+        Log.d(TAG, "VALUES PASSED FROM INTENT" + userEmail + userPassword + userPasswordConfirm);
 
         /**
          * By Default, always start EmailFormFragment as the main fragment for register
@@ -113,13 +134,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         transaction.replace(R.id.registerContent, mEmailFormFragment);
         transaction.commit();
 
+        mNextButton1 = (TextView) findViewById(R.id.btnNext2);
+        mAuth = FirebaseAuth.getInstance();
+        createAuthStateListener();
+        createAuthProgressDialog();
+
+        /** Assigning the Firebase Reference, basically we are telling Firebase where are
+         * starting point should be inside our database. For this use case, we want the
+         * userAccount variable to hold the reference to the users section of our database. */
+        userAccounts = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("users");
+
         /**
          * When the form is complete, trigger this condition
          * */
         if(isFormDone != null){
             if(isFormDone.equals("1")){
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(intent);
+                createNewUser();
+
             }else{
                 Log.d(TAG, "onCreate: WORK FRAGMENT IS NULL");
             }
@@ -195,24 +229,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 transaction.commit();
             }
         }
-
-        mNextButton1 = (TextView) findViewById(R.id.btnNext2);
-        mAuth = FirebaseAuth.getInstance();
-        createAuthStateListener();
-        createAuthProgressDialog();
-
-        /** Assigning the Firebase Reference, basically we are telling Firebase where are
-         * starting point should be inside our database. For this use case, we want the
-         * userAccount variable to hold the reference to the users section of our database. */
-        userAccounts = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child("users");
-
         Log.d(TAG, "onCreate: ends");
     }
-
-
 
     @Override
     public void onStart() {
@@ -245,12 +263,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void createNewUser() {
-        final String email = "placerhiolder"; //etEmail.getText().toString().trim();
-        String password = "placeholder"; //etPassword.getText().toString().trim();
-        String password2 = "placeholder"; //etPasswordConfirm.getText().toString().trim();
+        Log.d(TAG, "createNewUser: "+ userEmail);
+        Log.d(TAG, "createNewUser: "+ userPassword);
+        String email = userEmail;
+        String password = userPassword;
+        String password2 = userPasswordConfirm;
 
-        if(!email.equals("") && !password.equals("") && !password2.equals("")) {
-            if (password.equals(password2)) {
                 mAuthProgressDialog.show();
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -273,12 +291,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             }
                         });
-            } else {
-                Toast.makeText(this, "Password's don't match", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void createAuthStateListener() {

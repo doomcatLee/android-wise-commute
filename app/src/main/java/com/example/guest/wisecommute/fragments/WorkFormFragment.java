@@ -44,7 +44,6 @@ public class WorkFormFragment extends Fragment {
             }
         });
 
-
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

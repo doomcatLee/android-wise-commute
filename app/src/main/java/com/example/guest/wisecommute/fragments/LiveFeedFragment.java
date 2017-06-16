@@ -4,6 +4,7 @@ package com.example.guest.wisecommute.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,6 +38,8 @@ public class LiveFeedFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private Context mContext;
 
+    private SwipeRefreshLayout swipeContainer;
+
     public ArrayList<Tweet> mTweets = new ArrayList<>();
 
     public LiveFeedFragment() {
@@ -49,9 +52,25 @@ public class LiveFeedFragment extends Fragment {
         ButterKnife.bind(getActivity());
         Log.d(TAG, "onCreateView: getActivity " + getActivity());
 
+        View view = inflater.inflate(R.layout.fragment_live_feed, container, false);
+
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getTweets("trimet", "10");
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         getTweets("trimet", "10");
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_live_feed, container, false);
+        return view;
     }
 
     private void getTweets(String screenName, String count) {
@@ -73,7 +92,7 @@ public class LiveFeedFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        swipeContainer.setRefreshing(false);
                         mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.twitterRecyclerView);
                         mAdapter = new TwitterAdapter(getActivity(), mTweets);
                         mRecyclerView.setAdapter(mAdapter);

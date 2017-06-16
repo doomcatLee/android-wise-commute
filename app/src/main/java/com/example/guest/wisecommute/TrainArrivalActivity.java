@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class TrainArrivalActivity extends AppCompatActivity implements View.OnCl
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private DashboardFragment dashboardFragment;
+    private SwipeRefreshLayout swipeContainer;
 
     private String trainColor;
     private String trainStopID;
@@ -55,15 +57,30 @@ public class TrainArrivalActivity extends AppCompatActivity implements View.OnCl
         ButterKnife.bind(this);
         Log.d(TAG, "onCreate: starts");
 
-        fragmentManager = getSupportFragmentManager();
-        dashboardFragment = new DashboardFragment();
-
         Intent intent = getIntent();
         trainColor = intent.getStringExtra("trainColor");
         trainDirection = intent.getStringExtra("trainDirection");
         trainStopID = intent.getStringExtra("stopID");
         stopName = intent.getStringExtra("stopName");
         trainShortSign = intent.getStringExtra("trainShortSign");
+
+        fragmentManager = getSupportFragmentManager();
+        dashboardFragment = new DashboardFragment();
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getTrains(trainColor, trainStopID, trainDirection);
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
 
         tvStopName.setText(stopName);
 
@@ -148,7 +165,7 @@ public class TrainArrivalActivity extends AppCompatActivity implements View.OnCl
                 TrainArrivalActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        swipeContainer.setRefreshing(false);
                         mAdapter = new TrainListAdapter(getApplicationContext(), mTrains);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TrainArrivalActivity.this);

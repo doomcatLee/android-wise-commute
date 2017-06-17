@@ -19,12 +19,18 @@ import com.example.guest.wisecommute.models.Train;
 import com.example.guest.wisecommute.services.TrimetService;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -36,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private Intent navIntent;
     private DashboardFragment dashboardFragment;
 
+    private String timeLeft;
+
     ArrayList<Train> mTrains = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -43,9 +51,16 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            getTrainTime("green","7787", "clackamas");
             fragmentManager = getSupportFragmentManager();
             switch (item.getItemId()) {
                 case R.id.navigation_to_from:
+                    Bundle bundle = new Bundle();
+                    bundle.putString("timeLeft", timeLeft);
+                    userPreferenceArrivalFragment.setArguments(bundle);
+
+                    Log.d(TAG, "onNavigationItemSelected:" +timeLeft);
+                    Log.d(TAG, "onNavigationItemSelected:");
                     fragmentManager = getSupportFragmentManager();
                     transaction = fragmentManager.beginTransaction();
                     transaction.replace(R.id.content, userPreferenceArrivalFragment);
@@ -75,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         liveFeedFragment = new LiveFeedFragment();
         dashboardFragment = new DashboardFragment();
         fragmentManager = getSupportFragmentManager();
+
 
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.content, userPreferenceArrivalFragment);
@@ -176,6 +192,49 @@ public class MainActivity extends AppCompatActivity {
 //                        mRecyclerView.setHasFixedSize(true);
                     }
                 });
+            }
+        });
+        Log.d(TAG, "getTrains: ends");
+    }
+
+
+    private void getTrainTime(String trainColor, String trainStopID, String trainDirection) {
+        Log.d(TAG, "getTrains: starts");
+        final TrimetService trimetService = new TrimetService();
+        trimetService.findArrivals(trainColor, trainStopID, trainDirection, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                Log.e(TAG, "onFailure: API Call failed with " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.d(TAG, "onResponse: starts");
+
+                try {
+                    // we convert the response to a string, to make sure the response is in JSON format
+                    String json = response.body().string();
+                    if(response.isSuccessful()) {
+                        JSONObject trimetJSON = new JSONObject(json);
+                        JSONArray arrivalJSON = trimetJSON.getJSONObject("resultSet").getJSONArray("arrival");
+                        JSONObject obj = arrivalJSON.getJSONObject(0);
+
+                        long now = System.currentTimeMillis();
+                        long end = Long.parseLong(obj.getString("estimated"));
+                        String output = Long.toString((end-now)/1000);
+                        Log.d(TAG, "onResponse: TRAIN ARRAY" + output);
+                        timeLeft = output;
+
+
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
         Log.d(TAG, "getTrains: ends");

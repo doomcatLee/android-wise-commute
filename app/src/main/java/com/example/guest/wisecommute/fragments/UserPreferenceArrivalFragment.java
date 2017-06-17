@@ -43,6 +43,7 @@ public class UserPreferenceArrivalFragment extends Fragment {
 
         // Inflate the layout for this fragment
         timer.runTimer(tvTimerText,tvCircle,getActivity());
+        timer.onClickStart(view);
         return view;
     }
 

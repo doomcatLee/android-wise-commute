@@ -29,6 +29,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+        }
+
     }
     buildTypes.each {
         it.buildConfigField 'String', 'Trimet_API_KEY', Trimet_API_KEY
@@ -39,6 +43,7 @@ android {
     }
     productFlavors {
     }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/fonts'] } }
 }
 
 dependencies {

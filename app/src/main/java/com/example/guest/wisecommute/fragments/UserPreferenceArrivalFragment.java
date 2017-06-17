@@ -1,6 +1,7 @@
 package com.example.guest.wisecommute.fragments;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,9 +43,10 @@ public class UserPreferenceArrivalFragment extends Fragment {
 
     TextView tvTimerText;
     TextView tvCircle;
-    @Bind(R.id.tvTrainName) TextView tvTrainName;
-    @Bind(R.id.tvStopName) TextView tvStopName;
+    TextView tvTrainName;
+    TextView tvStopName;
     @Bind(R.id.preferenceArrivalRecyclerView) RecyclerView mRecyclerView;
+
 
     private String timeLeft;
 
@@ -58,9 +60,20 @@ public class UserPreferenceArrivalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ButterKnife.bind(getActivity());
+
         View view = inflater.inflate(R.layout.fragment_user_preference_arrival, container, false);
         tvTimerText = (TextView) view.findViewById(R.id.tvTimerText);
         tvCircle = (TextView) view.findViewById(R.id.tvCircle);
+        tvStopName = (TextView) view.findViewById(R.id.tvStopName);
+        tvTrainName = (TextView) view.findViewById(R.id.tvTrainName);
+
+        Typeface fontThin = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Thin.ttf");
+        Typeface fontRegular = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        tvTimerText.setTypeface(fontThin);
+        tvTrainName.setTypeface(fontRegular);
+        tvStopName.setTypeface(fontRegular);
+
+
 
         if (getArguments() != null) {
             timeLeft = getArguments().getString("timeLeft");

@@ -1,8 +1,10 @@
 package com.example.guest.wisecommute.models;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -19,12 +21,16 @@ public class Timer {
         seconds = s;
     }
 
-    public void runTimer(final TextView time, final TextView circle){
+    public void runTimer(final TextView time, final TextView circle, Context context){
 
-        Resources res = time.getResources();
-        final Drawable greenCircle = res.getDrawable(R.drawable.greencircle);
-        final Drawable redCircle= res.getDrawable(R.drawable.redcircle);
-        final Drawable yellowCircle = res.getDrawable(R.drawable.yellowcircle);
+//        Resources res = time.getResources();
+//        final Drawable greenCircle = res.getDrawable(R.drawable.greencircle);
+//        final Drawable redCircle= res.getDrawable(R.drawable.redcircle);
+//        final Drawable yellowCircle = getResources().getDrawable(R.drawable.yellowcircle);
+
+        final Drawable greenCircle = ContextCompat.getDrawable(context, R.drawable.greencircle);
+        final Drawable yellowCircle = ContextCompat.getDrawable(context, R.drawable.greencircle);
+        final Drawable redCircle = ContextCompat.getDrawable(context, R.drawable.greencircle);
 
         final Handler handler = new Handler();
         handler.post(new Runnable(){

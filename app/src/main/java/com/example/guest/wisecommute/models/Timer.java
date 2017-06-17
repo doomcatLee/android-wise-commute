@@ -29,8 +29,8 @@ public class Timer {
 //        final Drawable yellowCircle = getResources().getDrawable(R.drawable.yellowcircle);
 
         final Drawable greenCircle = ContextCompat.getDrawable(context, R.drawable.greencircle);
-        final Drawable yellowCircle = ContextCompat.getDrawable(context, R.drawable.greencircle);
-        final Drawable redCircle = ContextCompat.getDrawable(context, R.drawable.greencircle);
+        final Drawable yellowCircle = ContextCompat.getDrawable(context, R.drawable.yellowcircle);
+        final Drawable redCircle = ContextCompat.getDrawable(context, R.drawable.redcircle);
 
         final Handler handler = new Handler();
         handler.post(new Runnable(){
@@ -39,8 +39,8 @@ public class Timer {
             public void run() {
                 int minutes = (seconds%3600)/60;
                 int secs =  seconds%60;
-                Log.d("mins", Integer.toString(minutes));
-                Log.d("secs", Integer.toString(secs));
+//                Log.d("mins", Integer.toString(minutes));
+//                Log.d("secs", Integer.toString(secs));
                 String timeFormatted = String.format("%02d:%02d", minutes, secs);
                 time.setText(timeFormatted);
                 if (running){

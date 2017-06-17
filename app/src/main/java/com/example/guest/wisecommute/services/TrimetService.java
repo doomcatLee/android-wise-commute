@@ -87,4 +87,9 @@ public class TrimetService {
         }
         return trains;
     }
+
+
+    public String trainTimeParser(){
+        return "as";
+    }
 }

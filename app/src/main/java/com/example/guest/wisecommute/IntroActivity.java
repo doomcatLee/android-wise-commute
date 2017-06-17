@@ -7,21 +7,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.guest.wisecommute.models.Timer;
+
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button mRegisterButton;
     TextView mLoginButton;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+
 
         mRegisterButton = (Button) findViewById(R.id.registerButton);
         mRegisterButton.setOnClickListener(this);
 
         mLoginButton = (TextView) findViewById(R.id.loginTextView);
         mLoginButton.setOnClickListener(this);
+
 
 
     }

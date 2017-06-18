@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" />
+            android:label="Wise Commute" />
         <activity android:name=".IntroActivity"
             android:theme="@style/NoActionBarTheme">
             <intent-filter>

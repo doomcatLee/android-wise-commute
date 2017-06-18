@@ -1,6 +1,7 @@
 package com.example.guest.wisecommute;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
     Button mRegisterButton;
     TextView mLoginButton;
+    TextView IntroText;
+    TextView IntroText2;
 
     @Override
 
@@ -20,12 +23,22 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-
         mRegisterButton = (Button) findViewById(R.id.registerButton);
         mRegisterButton.setOnClickListener(this);
 
         mLoginButton = (TextView) findViewById(R.id.loginTextView);
         mLoginButton.setOnClickListener(this);
+
+        IntroText = (TextView) findViewById(R.id.textView);
+        IntroText2 = (TextView) findViewById(R.id.textView2);
+
+
+        Typeface fontThin = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
+        Typeface fontRegular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        mRegisterButton.setTypeface(fontRegular);
+        mLoginButton.setTypeface(fontRegular);
+        IntroText.setTypeface(fontThin);
+        IntroText2.setTypeface(fontThin);
 
 
 

@@ -9,16 +9,17 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="43dp"
+        android:layout_width="382dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="15dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="15dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="126dp"
+        android:layout_marginTop="133dp"
         android:text="Welcome to Wise Commute."
         android:textColor="@color/colorTextPrimary"
-        android:textSize="20sp"
+        android:textSize="27sp"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/loginTextView"
         app:layout_constraintTop_toTopOf="parent"
@@ -59,18 +60,18 @@
         tools:layout_constraintRight_creator="1" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:id="@+id/textView2"
+        android:layout_width="386dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="14dp"
         android:text="We care about your experience"
         android:textColor="@color/colorTextPrimary"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="22dp" />
 
 </android.support.constraint.ConstraintLayout>

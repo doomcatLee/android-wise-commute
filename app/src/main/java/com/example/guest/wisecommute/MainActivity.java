@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
                         long now = System.currentTimeMillis();
                         long end = Long.parseLong(obj.getString("estimated"));
-                        String output = Long.toString((end-now)/1000);
+                        String output = Long.toString(((end-now)/1000) - 50); //removing 50 seconds for accuracy
                         Log.d(TAG, "onResponse: TRAIN ARRAY" + output);
                         timeLeft = output;
 
